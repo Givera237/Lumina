@@ -96,7 +96,8 @@ export class AuthService {
 
   // Vérifie le code OTP ET connecte l'utilisateur si le code est valide :
   // le backend renvoie les tokens comme pour un login classique
-  verifyMail(otp: { email: string | null; code: string }): Observable<VerifyOtpResponse> {
+  verifyMail(otp: { email: string | null; code: string }): Observable<VerifyOtpResponse> 
+  {
     return this.http
       .post<VerifyOtpResponse>(`${this.baseUrl}/verify-otp`, otp)
       .pipe(
@@ -107,4 +108,15 @@ export class AuthService {
         })
       );
   }
+
+  requestPasswordReset(email : string): Observable<void> 
+  {
+    return this.http.post<void>(`${this.baseUrl}/request-password-reset`, { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<void> 
+  {
+    return this.http.post<void>(`${this.baseUrl}/reset-password`, { token, newPassword });
+  }
+
 }
