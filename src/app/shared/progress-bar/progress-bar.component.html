@@ -1,0 +1,14 @@
+ @if (loadingService.isBarLoading()) {
+      <div class="fixed top-0 left-0 w-full h-1 z-[9999] overflow-hidden bg-transparent">
+        <div class="h-full bg-primary progress-bar-animate"></div>
+      </div>
+    }
+
+    @if (loadingService.isOverlayLoading()) {
+      <div class="fixed inset-0 z-[9998] bg-white/60 backdrop-blur-sm flex items-center justify-center">
+        <div class="flex flex-col items-center gap-4">
+          <span class="material-symbols-outlined text-primary text-5xl animate-spin">progress_activity</span>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Chargement en cours...</p>
+        </div>
+      </div>
+    }

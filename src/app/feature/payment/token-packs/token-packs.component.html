@@ -1,0 +1,146 @@
+<div class="min-h-screen text-on-surface flex flex-col purchase-container">
+  
+  <!-- Top Navigation Bar -->
+  <header class="bg-surface/70 backdrop-blur-md text-primary border-b border-outline-variant/15 shadow-sm flex justify-between items-center w-full px-margin-desktop py-4 sticky top-0 z-50">
+    <div class="flex items-center gap-4">
+      <span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 transition-transform" (click)="goBack()">arrow_back</span>
+      <h1 class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight">LUMINA</h1>
+    </div>
+    <div class="flex items-center gap-stack-md">
+      <span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-high transition-colors p-2 rounded-full">notifications</span>
+      <span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-high transition-colors p-2 rounded-full">bookmark</span>
+      <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant/30">
+        <img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtL1Foh215y6bNr3rr00DtluURfvpP_XShZsOEIdGxtxmPhdxhMWN1d4f18azGeuP8lM6h3-gsGYv8hxawXjIc_NHKPc38uIk_pZV0ZWYniWV2TVQcwiVKxOiSpwQYAMUfO9A-z2Y3SxAC6MFn-DbdlDSH3zS8Z5mjc2cAt78nPlZSwn4dli78SoEDWmRNsu8CbPYGX0RL_yqMPy6lflYElB5BlPFaY2kiSO3pearTOpc-0zPITecRwD7804YOoSUa6o1nAU_UVPo"/>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg flex flex-col items-center flex-grow">
+    <!-- Hero Section -->
+    <div class="text-center mb-stack-lg animate-fade-in">
+      <h2 class="font-headline-lg text-headline-lg text-primary mb-2">Enhance Your Journey</h2>
+      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Select a token package to unlock exclusive luxury experiences and curated digital collections.</p>
+    </div>
+
+    <!-- Token Packs Grid (Géré dynamiquement) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter w-full mb-stack-lg items-center">
+      <div *ngFor="let pack of tokenPacks"
+           (click)="selectPack(pack)"
+           [ngClass]="{
+             'border-2 border-primary/20 scale-105 shadow-xl bg-surface-container-lowest/90 relative z-10 py-10': pack.isPopular,
+             'border-b-4 border-b-transparent hover:border-b-secondary': !pack.isPopular,
+             'ring-2 ring-primary': selectedPack.id === pack.id
+           }"
+           class="glass-card rounded-[14px] p-8 flex flex-col items-center text-center transition-all duration-300 hover:scale-[1.02] cursor-pointer group">
+        
+        <!-- Badge "Best Value" pour l'offre populaire -->
+        <div *ngIf="pack.isPopular" class="absolute -top-4 left-1/2 -translate-x-1/2 bg-surface-tint text-white px-6 py-1 rounded-full font-label-md text-label-md shadow-md">
+          Best Value
+        </div>
+
+        <div [ngClass]="pack.isPopular ? 'bg-primary-container text-white' : 'bg-surface-container text-primary'" 
+             class="w-16 h-16 rounded-full flex items-center justify-center mb-6">
+          <span class="material-symbols-outlined text-4xl" [style.font-variation-settings]="pack.isPopular ? 'FILL 1' : ''">
+            {{ pack.icon }}
+          </span>
+        </div>
+
+        <h3 class="font-headline-sm text-headline-sm mb-2">{{ pack.name }}</h3>
+        <div class="text-secondary font-bold text-3xl mb-4">
+          {{ pack.tokens | number }} <span class="text-sm font-normal text-on-surface-variant">Tokens</span>
+        </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mb-8">{{ pack.description }}</p>
+        
+        <div [ngClass]="(selectedPack.id === pack.id || pack.isPopular) ? 'carmin-gradient text-white shadow-lg' : 'border border-outline-variant group-hover:bg-secondary group-hover:text-white'"
+             class="mt-auto w-full py-3 rounded-xl font-label-md text-label-md transition-colors duration-200">
+          {{ pack.priceXAF | number }} XAF
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+      <!-- Payment Method Selection -->
+      <div class="glass-card rounded-[14px] p-stack-md">
+        <h4 class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant mb-stack-md">Payment Method</h4>
+        <div class="space-y-stack-sm">
+          
+          <label *ngFor="let method of paymentMethods" 
+                 [ngClass]="{'border-primary ring-1 ring-primary/30': selectedPaymentMethodId === method.id}"
+                 class="flex items-center p-4 rounded-xl border border-outline-variant bg-[#FDFCFE] cursor-pointer transition-all hover:border-primary active:scale-98">
+            <input type="radio" 
+                   name="payment" 
+                   [value]="method.id" 
+                   [(ngModel)]="selectedPaymentMethodId"
+                   class="w-5 h-5 text-primary border-outline focus:ring-primary"/>
+            
+            <div class="ml-4 flex items-center gap-3">
+              <div [ngClass]="method.bgColorClass" class="w-10 h-10 rounded-lg flex items-center justify-center">
+                <span class="material-symbols-outlined" [ngClass]="method.iconColorClass">{{ method.icon }}</span>
+              </div>
+              <div>
+                <div class="font-label-md text-label-md">{{ method.name }}</div>
+                <div class="text-[10px] text-on-surface-variant uppercase tracking-tighter">{{ method.subtitle }}</div>
+              </div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+      <!-- Order Summary Réactif -->
+      <div class="glass-card rounded-[14px] p-stack-md flex flex-col">
+        <h4 class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant mb-stack-md">Order Summary</h4>
+        <div class="flex-grow space-y-4">
+          <div class="flex justify-between items-center pb-4 border-b border-outline-variant/10">
+            <span class="text-on-surface-variant font-body-sm">Package</span>
+            <span class="font-medium text-primary">{{ selectedPack.name }} Pack</span>
+          </div>
+          <div class="flex justify-between items-center pb-4 border-b border-outline-variant/10">
+            <span class="text-on-surface-variant font-body-sm">Amount</span>
+            <span class="font-medium">{{ selectedPack.tokens | number }} Tokens</span>
+          </div>
+          <div class="flex justify-between items-center pt-2">
+            <span class="font-bold text-headline-sm">Total</span>
+            <span class="font-bold text-headline-sm text-secondary">{{ selectedPack.priceXAF | number }} XAF</span>
+          </div>
+        </div>
+        
+        <button (click)="confirmPurchase()" 
+                class="mt-8 w-full py-4 rounded-xl carmin-gradient text-white font-label-md shadow-xl transition-all hover:brightness-110 active:scale-95 flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined">lock</span>
+          Confirm Purchase
+        </button>
+      </div>
+    </div>
+
+    <!-- Trust Badges -->
+    <div class="mt-stack-lg flex flex-wrap justify-center gap-8 opacity-60">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">verified_user</span>
+        <span class="font-label-md text-[12px] uppercase">Secure Encrypted</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">bolt</span>
+        <span class="font-label-md text-[12px] uppercase">Instant Delivery</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">support_agent</span>
+        <span class="font-label-md text-[12px] uppercase">24/7 Priority Support</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full px-margin-desktop py-stack-lg flex flex-col md:flex-row justify-between items-center bg-surface-container-low border-t border-outline-variant/10 mt-20">
+    <div class="flex flex-col items-center md:items-start mb-6 md:mb-0">
+      <span class="font-label-md text-label-md font-bold text-primary mb-2">LUMINA LUXURY</span>
+      <span class="font-body-sm text-body-sm text-on-surface-variant">© 2026 LUMINA Luxury. All rights reserved.</span>
+    </div>
+    <div class="flex flex-wrap justify-center gap-gutter">
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-body-sm" href="#">Privacy Policy</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-body-sm" href="#">Terms of Service</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-body-sm" href="#">Legal Notice</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-body-sm" href="#">Contact</a>
+    </div>
+  </footer>
+</div>

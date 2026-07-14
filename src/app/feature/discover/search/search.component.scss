@@ -1,0 +1,43 @@
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(180, 120, 220, 0.15);
+}
+
+.soft-glow {
+  box-shadow: 0 0 40px 5px rgba(139, 42, 176, 0.05);
+}
+
+.carmin-gradient {
+  background: linear-gradient(135deg, #A8214A 0%, #C2185B 100%);
+}
+
+// Classe appliquée sur le conteneur principal lors du focus de la recherche
+.bg-search-active {
+  background-color: #fdf8ff !important;
+  transition: background-color 0.3s ease;
+}
+
+// Animation d'entrée élégante pour les cartes créateurs lors du chargement
+.card-entrance {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUpFade 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes slideUpFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}

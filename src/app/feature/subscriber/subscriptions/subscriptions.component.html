@@ -1,0 +1,152 @@
+<div class="font-body-md text-on-background min-h-screen pb-24 md:pb-0 bg-[#fff7fd]">
+  
+  <header class="bg-white/70 w-full sticky top-0 z-40 backdrop-blur-xl border-b border-surface-variant/15 shadow-sm">
+    <div class="flex items-center justify-between px-6 md:px-margin-desktop py-stack-md w-full max-w-container-max mx-auto">
+      <div class="flex items-center gap-stack-lg">
+        <span class="font-headline-sm text-2xl font-bold text-primary tracking-tight">LUMINA</span>
+        <nav class="hidden md:flex items-center gap-stack-lg ml-stack-lg">
+          <a class="text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors duration-300 px-4 py-2 rounded-xl" href="#">Home</a>
+          <a class="text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors duration-300 px-4 py-2 rounded-xl" href="#">Explore</a>
+          <a class="text-primary font-medium bg-surface-container-low px-4 py-2 rounded-xl" href="#">Subscriptions</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-stack-md">
+        <div class="cursor-pointer active:scale-95 transition-transform p-2 rounded-full hover:bg-surface-container-low">
+          <span class="material-symbols-outlined text-primary">notifications</span>
+        </div>
+        <div class="cursor-pointer active:scale-95 transition-transform p-2 rounded-full hover:bg-surface-container-low flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+          <span class="text-label-md font-bold text-primary">{{ walletBalance }}</span>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-primary/20">
+          <img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC739YRmM-2daNWabComOYhb_0CaOVJ0LChBe_vRHQr0ceCnA_8ZaKGoJwivqfFAaHjyZ4ACGoxgMnwIa0mt7HU9vNpFqvcNtLFRV7JLAUqENDo8yTqvmLXCjd4YhfVxD3LtLgReFeIInjtViUEQ647Vrg7moH15Ca54naQ4QVwjwTa2psWlvwTnl-HuBwE7_WbawnAZCPDGrZwwYNvWqm2fkvv7WtZXzN1i8A_Uqf4LSpQG95X-t9ag3oSywUBaSf2ofaZ5QcVho"/>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex max-w-container-max mx-auto px-4 md:px-6">
+    <aside class="hidden md:flex flex-col h-[calc(100vh-80px)] w-64 sticky top-20 py-stack-md pr-stack-md gap-stack-sm border-r border-surface-variant/15">
+      <div class="mb-6">
+        <h2 class="font-headline-sm text-xl font-bold text-primary">LUMINA</h2>
+        <p class="text-on-surface-variant text-xs opacity-70">Exclusive Content</p>
+      </div>
+      <nav class="flex flex-col gap-1">
+        <a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-xl transition-all duration-200" href="#">
+          <span class="material-symbols-outlined">home</span>
+          <span class="font-label-md">Home</span>
+        </a>
+        <a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-xl transition-all duration-200" href="#">
+          <span class="material-symbols-outlined">explore</span>
+          <span class="font-label-md">Explore</span>
+        </a>
+        <a class="flex items-center gap-3 p-3 bg-surface-container-high text-primary font-bold rounded-xl transition-all duration-200" href="#">
+          <span class="material-symbols-outlined">loyalty</span>
+          <span class="font-label-md">Subscriptions</span>
+        </a>
+        <a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-xl transition-all duration-200" href="#">
+          <span class="material-symbols-outlined">mail</span>
+          <span class="font-label-md">Messages</span>
+        </a>
+        <a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-xl transition-all duration-200" href="#">
+          <span class="material-symbols-outlined">payments</span>
+          <span class="font-label-md">Wallet</span>
+        </a>
+        <a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-xl transition-all duration-200" href="#">
+          <span class="material-symbols-outlined">person</span>
+          <span class="font-label-md">Profile</span>
+        </a>
+      </nav>
+      <button (click)="createPost()" class="mt-stack-lg primary-gradient text-white py-3 px-6 rounded-full font-bold shadow-md hover:opacity-90 active:scale-95 transition-all text-label-md uppercase tracking-wider">
+        Create Post
+      </button>
+    </aside>
+
+    <main class="flex-1 py-stack-lg md:pl-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-stack-md mb-stack-lg">
+          <div>
+            <h1 class="font-headline-lg text-4xl text-primary mb-2">Mes Abonnements</h1>
+            <p class="text-on-surface-variant text-lg">Gérez vos accès exclusifs et vos renouvellements.</p>
+          </div>
+          <div #glassCard class="glass-card p-6 rounded-xl flex items-center gap-4 shadow-sm">
+            <div class="bg-surface-container-high p-3 rounded-full">
+              <span class="material-symbols-outlined text-primary text-3xl">token</span>
+            </div>
+            <div>
+              <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest opacity-80">Dépense Totale</p>
+              <p class="text-2xl font-bold text-primary">{{ totalExpense }} jetons <span class="text-sm font-normal text-on-surface-variant">/ mois</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div *ngFor="let sub of subscriptions" #glassCard class="glass-card p-6 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-6 transition-all hover:translate-y-[-2px] hover:shadow-md">
+            <div class="flex items-center gap-4">
+              <div class="relative flex-shrink-0">
+                <img [alt]="sub.name" class="w-16 h-16 rounded-full bg-tertiary-fixed object-cover border-2 border-white shadow-sm" [src]="sub.avatar"/>
+                <div *ngIf="sub.isOnline" class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-on-surface">{{ sub.name }}</h3>
+                <p class="text-on-surface-variant text-sm">{{ sub.role }}</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 sm:flex sm:items-center gap-6 sm:gap-stack-lg">
+              <div>
+                <p class="text-on-surface-variant text-xs opacity-75">Prix</p>
+                <p class="font-bold text-primary text-sm sm:text-base">{{ sub.price }} jetons/mois</p>
+              </div>
+              <div>
+                <p class="text-on-surface-variant text-xs opacity-75">Prochain renouvellement</p>
+                <p class="font-medium text-sm sm:text-base">{{ sub.nextRenewal }}</p>
+              </div>
+            </div>
+            <button (click)="manageSubscription(sub)" class="w-full sm:w-auto px-6 py-2 border border-primary/30 text-primary rounded-full font-medium hover:bg-primary hover:text-white active:scale-95 transition-all text-sm">
+              Gérer
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-16">
+          <h2 class="text-xl font-bold text-primary mb-6">Recommandé pour vous</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2 relative h-64 rounded-xl overflow-hidden shadow-sm group">
+              <img alt="Exclusive Collection" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH3lZoOhgay6NoEGx3HAjxeh7RTu5pMF6TcRnHakrbYhZvcsr2fne9TvlMMl-jIRegVxqt2VTPyGR9TryPsOnlABrLhC_ZX5amzJTj_H9PHf3ZRTls8m8USTnQ9regUVDefXrIhyRlV6J9ay72MFnSyX37KNUVL7JgsLADc2DFm4QAywdfpQkd3UTcUhMd50dvWO4PAo3LpegGmwVhHgKRYLcDs4hWyF_SGKCXlDFhYQnZJPScuz3EJ2FmfFINy4Jru3bUpWS_2WE"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                <span class="bg-primary/90 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full w-fit mb-2">Tendance</span>
+                <h4 class="text-white text-lg font-bold">Nouvelle Collection d'Hiver</h4>
+                <p class="text-white/80 text-sm">Découvrez les coulisses avec Marcus Thorne.</p>
+              </div>
+            </div>
+            <div #glassCard class="glass-card p-6 rounded-xl flex flex-col justify-center items-center text-center shadow-sm">
+              <span class="material-symbols-outlined text-secondary text-4xl mb-4">diamond</span>
+              <h4 class="font-bold text-on-surface mb-2">LUMINA Gold</h4>
+              <p class="text-on-surface-variant text-xs mb-6 opacity-90">Accédez à des contenus illimités sans jetons.</p>
+              <button class="w-full py-3 rounded-full border border-secondary text-secondary font-bold hover:bg-secondary hover:text-white transition-all text-sm">S'abonner</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-surface-variant/15 z-50 flex items-center justify-around py-3 px-6 shadow-lg">
+    <a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="#">
+      <span class="material-symbols-outlined">home</span>
+      <span class="text-[10px] font-medium uppercase tracking-tighter">Accueil</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="#">
+      <span class="material-symbols-outlined">explore</span>
+      <span class="text-[10px] font-medium uppercase tracking-tighter">Explorer</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-primary" href="#">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">loyalty</span>
+      <span class="text-[10px] font-bold uppercase tracking-tighter">Abonnements</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="#">
+      <span class="material-symbols-outlined">person</span>
+      <span class="text-[10px] font-medium uppercase tracking-tighter">Profil</span>
+    </a>
+  </nav>
+</div>

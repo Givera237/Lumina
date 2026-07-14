@@ -1,0 +1,111 @@
+<main class="flex h-screen w-full relative overflow-hidden">
+  
+  <section #visualSide class="hidden lg:flex lg:w-1/2 relative overflow-hidden items-center justify-center p-margin-desktop">
+    <div class="absolute inset-0 z-0">
+      <img alt="Luxury Abstract Visual" 
+           class="w-full h-full object-cover grayscale brightness-95 opacity-90" 
+           src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEItqVwhQzyMaNlUE0Vjzzc0fKxDPP_mATjWwZswyoua6Mgqd6JIkKm6sPr0TtGkbTaKd9f1LPZ3WFrghbYykFHSsuj5fEaIUltOlEqmfpHIiX6ItAdYj4lIVIM9lC7isyy9cJCwjqRu8646iJrYfI2yvkpzt0rZG_DR7HpeFHRHvisHW-Q0BF5iYXWUe9Hwf1B6M7ienLA0QMm2qlg5YXFK2QpziAfFye5z-y3YnhQuVzA17PgYLXiyz9xgnqlJ_y_kvo2HkcGyE"/>
+      <div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+      <div class="absolute inset-0 luxury-glow" ></div>
+    </div>
+    
+    <div class="relative z-10 glass-panel p-12 rounded-[24px] max-w-lg text-center">
+      <h1 class="font-headline-xl text-headline-xl text-on-surface mb-stack-sm tracking-tighter">LUMINA</h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant italic">L'élégance du contenu, la pureté de la création.</p>
+      <div class="mt-stack-lg flex justify-center gap-4">
+        <div class="w-12 h-[1px] bg-outline-variant mt-3"></div>
+        <span class="font-label-md text-label-md uppercase tracking-[0.2em] text-primary">Prestige Digital</span>
+        <div class="w-12 h-[1px] bg-outline-variant mt-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full lg:w-1/2 flex flex-col items-center justify-center bg-surface-container-lowest p-margin-mobile md:p-margin-desktop relative overflow-y-auto">
+    
+    <div class="lg:hidden mb-stack-lg text-center">
+      <h1 class="font-headline-md text-headline-md text-primary font-bold tracking-tight">LUMINA</h1>
+    </div>
+
+    <div class="w-full max-w-[440px] glass-panel p-8 md:p-10 rounded-[14px] shadow-sm relative min-h-[460px] flex flex-col justify-center overflow-hidden">
+      
+      <div class="form-transition opacity-100 translate-x-0 pointer-events-auto relative">
+        <div class="mb-stack-lg">
+          <h2 class="font-headline-sm text-headline-sm text-on-surface mb-2">Bon retour parmi nous</h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Veuillez saisir vos identifiants pour accéder à votre studio.</p>
+        </div>
+
+        @if (errorMessage()) 
+        {
+          <p class="error-text text-center my-5" style="color: red;" >{{ errorMessage() }}</p>
+        }
+        
+        <form [formGroup]="loginForm" class="space-y-stack-md">
+
+          <div class="space-y-2">
+            <label class="font-label-md text-label-md text-on-surface-variant px-1">Email</label>
+            <input name="loginEmail"
+                   formControlName="email"
+                   required
+                   email
+                   class="w-full px-4 py-3 bg-[#FDFCFE] border border-[#E8E2ED] rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all duration-200 placeholder:text-outline/50" 
+                   placeholder="nom@exemple.com" 
+                   type="email"/>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex justify-between items-center px-1">
+              <label class="font-label-md text-label-md text-on-surface-variant">Mot de passe</label>
+              <a class="text-[12px] font-medium text-primary hover:underline" href="#">Mot de passe oublié ?</a>
+            </div>
+            <input name="loginPassword"
+                   formControlName="password"
+                   required
+                   class="w-full px-4 py-3 bg-[#FDFCFE] border border-[#E8E2ED] rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all duration-200 placeholder:text-outline/50" 
+                   placeholder="••••••••" 
+                   type="password"/>
+          </div>
+
+          <button (click)="onLoginSubmit()"
+                  class="w-full py-4 mt-stack-md btn-gradient text-white font-semibold rounded-lg text-body-md shadow-sm disabled:opacity-50 disabled:cursor-not-allowed" 
+                  type="submit">
+            Se connecter
+          </button>
+        </form>
+
+        <div class="relative flex py-5 items-center">
+          <div class="flex-grow border-t border-outline-variant/30"></div>
+          <span class="flex-shrink mx-4 font-body-sm text-body-sm text-on-surface-variant/50">Ou continuer avec</span>
+          <div class="flex-grow border-t border-outline-variant/30"></div>
+        </div>
+
+        <a href="http://localhost:3003/api/auth/google" 
+           class="flex items-center justify-center gap-3 w-full py-3.5 bg-[#FDFCFE] border border-[#E8E2ED] hover:bg-[#F5F2F7] text-on-surface font-medium rounded-lg text-body-md shadow-sm transition-all duration-200">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.5 24c0-1.61-.15-3.16-.42-4.69H24v9.09h12.64c-.54 2.81-2.13 5.19-4.51 6.79l7.03 5.45C43.27 36.43 46.5 30.73 46.5 24z"/>
+            <path fill="#FBBC05" d="M10.54 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.98-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.03-5.45c-1.95 1.3-4.43 2.07-8.86 2.07-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          Se connecter avec Google
+        </a>
+        <div class="mt-stack-lg pt-stack-lg border-t border-outline-variant/20 text-center">
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Nouveau sur Lumina ? 
+            <button class="text-primary font-semibold hover:underline ml-1" >Créer un compte</button>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="mt-stack-lg text-center max-w-[440px] w-full px-8">
+      <div class="flex justify-center gap-6 mb-4">
+        <a class="font-body-sm text-body-sm text-on-surface-variant/60 hover:text-primary transition-colors" href="#">Confidentialité</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant/60 hover:text-primary transition-colors" href="#">Conditions</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant/60 hover:text-primary transition-colors" href="#">Aide</a>
+      </div>
+      <p class="text-[12px] text-outline/40">© 2026 LUMINA. Tous droits réservés.</p>
+    </footer>
+
+  </section>
+</main>

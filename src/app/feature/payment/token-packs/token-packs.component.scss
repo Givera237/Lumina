@@ -1,0 +1,44 @@
+// Injection des dégradés d'arrière-plan de la maquette originelle
+.purchase-container {
+  background-color: #fff7fd;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(243, 232, 255, 0.5) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(252, 239, 255, 0.5) 0px, transparent 50%);
+}
+
+// Structure de carte de style "glassmorphism" propre à Lumina
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(180, 120, 220, 0.15);
+}
+
+// Dégradé Carmin Premium
+.carmin-gradient {
+  background: linear-gradient(135deg, #A8214A 0%, #C2185B 100%);
+}
+
+// Animation d'entrée douce
+.animate-fade-in {
+  animation: fadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Click Feedbacks mécaniques
+.active\:scale-95:active {
+  transform: scale(0.95);
+}
+.active\:scale-98:active {
+  transform: scale(0.98);
+}

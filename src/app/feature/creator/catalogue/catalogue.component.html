@@ -1,0 +1,212 @@
+<div class="flex min-h-screen font-body-md text-body-md antialiased bg-background">
+  
+  <!-- SideNavBar -->
+  <aside class="h-screen w-64 fixed left-0 top-0 bg-surface-bright/80 backdrop-blur-md flex flex-col gap-stack-md p-gutter border-r border-surface-variant/15 z-50">
+    <div class="mb-stack-lg">
+      <span class="font-headline-sm text-headline-sm text-primary">LUMINA</span>
+      <p class="font-label-md text-label-md text-on-surface-variant mt-1 opacity-70">Creator Hub</p>
+    </div>
+    
+    <nav class="flex-1 space-y-2">
+      <!-- Dashboard -->
+      <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all hover:translate-x-1 duration-200" href="#">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span class="font-label-md text-label-md">Dashboard</span>
+      </a>
+      <!-- Catalog (Active) -->
+      <a class="flex items-center gap-3 px-4 py-3 bg-surface-container text-primary font-semibold rounded-lg hover:translate-x-1 duration-200" href="#">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">folder_copy</span>
+        <span class="font-label-md text-label-md">Catalog</span>
+      </a>
+      <!-- Wallet -->
+      <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all hover:translate-x-1 duration-200" href="#">
+        <span class="material-symbols-outlined">account_balance_wallet</span>
+        <span class="font-label-md text-label-md">Wallet</span>
+      </a>
+      <!-- Messages -->
+      <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all hover:translate-x-1 duration-200" href="#">
+        <span class="material-symbols-outlined">chat_bubble</span>
+        <span class="font-label-md text-label-md">Messages</span>
+      </a>
+      <!-- Settings -->
+      <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all hover:translate-x-1 duration-200" href="#">
+        <span class="material-symbols-outlined">settings</span>
+        <span class="font-label-md text-label-md">Settings</span>
+      </a>
+      <!-- Admin tools -->
+      <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all hover:translate-x-1 duration-200" href="#">
+        <span class="material-symbols-outlined">admin_panel_settings</span>
+        <span class="font-label-md text-label-md">Admin tools</span>
+      </a>
+    </nav>
+
+    <div class="mt-auto pt-6 border-t border-surface-variant/10">
+      <div class="flex items-center gap-3 px-2">
+        <img alt="User profile" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoOGeAg-8wkzl1_v-uDN5ixJDP_QmcDEfECx5crt9RKNieyCvdkKvifa0yWKlWlQlRgo5ZtiaVjXgU5CcOBgq6GTQkNJoP6tu-BoLt3IiMqA4_SOucz_tn9Thxc7aEBvCtGBVW4tBeUUTwAQjpbit4C83xXH9IgH5a9j8KSVjTE617-_KF-QEqNurbY1nNRqSAMODi2b7tcMo9MO3g9ZV2gvrxqjQwYonWkHLmwNfX1HFhcC3-cpFSeF2vrs30YN5ibvhS7GAgpNI"/>
+        <div>
+          <p class="font-label-md text-on-surface font-semibold">Elara Vance</p>
+          <p class="text-[11px] text-primary uppercase tracking-widest font-bold">Premium Tier</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Canvas -->
+  <main class="flex-1 ml-64 p-margin-desktop bg-background min-h-screen">
+    
+    <!-- Header Section -->
+    <header class="flex justify-between items-end mb-stack-lg">
+      <div class="space-y-1">
+        <h1 class="font-headline-lg text-headline-lg text-on-surface">Gestion du Catalogue</h1>
+        <p class="text-on-surface-variant font-body-md max-w-xl">Optimisez vos publications et analysez vos performances en un coup d'œil.</p>
+      </div>
+      <button (click)="onCreatePost()" class="carmin-gradient px-8 py-3 rounded-full flex items-center gap-2 font-label-md shadow-lg active:scale-95 transition-transform">
+        <span class="material-symbols-outlined">add</span>
+        Nouveau Post
+      </button>
+    </header>
+
+    <!-- Stats Overview (Bento Grid) -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-lg">
+      <div class="glass-card p-stack-md flex flex-col justify-between">
+        <span class="text-on-surface-variant font-label-md uppercase tracking-wider text-[11px]">Vues Totales</span>
+        <div class="mt-4 flex items-end gap-3">
+          <span class="font-headline-md text-headline-md text-primary">124.8K</span>
+          <span class="text-green-600 text-body-sm flex items-center mb-2">
+            <span class="material-symbols-outlined text-sm">trending_up</span> 12%
+          </span>
+        </div>
+      </div>
+      <div class="glass-card p-stack-md flex flex-col justify-between border-primary/20">
+        <span class="text-on-surface-variant font-label-md uppercase tracking-wider text-[11px]">Tokens Générés</span>
+        <div class="mt-4 flex items-end gap-3">
+          <span class="font-headline-md text-headline-md text-secondary">42,500</span>
+          <span class="text-on-surface-variant text-[11px] mb-2 font-medium">LMN Tokens</span>
+        </div>
+      </div>
+      <div class="glass-card p-stack-md flex flex-col justify-between">
+        <span class="text-on-surface-variant font-label-md uppercase tracking-wider text-[11px]">Taux de Conversion</span>
+        <div class="mt-4 flex items-end gap-3">
+          <span class="font-headline-md text-headline-md text-on-surface">8.4%</span>
+          <span class="text-primary text-body-sm flex items-center mb-2">Stable</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catalog Table Container -->
+    <div class="glass-card overflow-hidden shadow-sm">
+      <!-- Table Filters -->
+      <div class="px-gutter py-4 border-b border-surface-variant/10 flex justify-between items-center bg-white/30">
+        <div class="flex gap-4">
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/50 text-sm">search</span>
+            <input 
+              type="text"
+              [(ngModel)]="searchQuery"
+              (ngModelChange)="onSearchChange()"
+              class="bg-surface-bright border border-surface-variant/20 rounded-lg pl-10 pr-4 py-2 text-body-sm focus:ring-primary focus:border-primary outline-none transition-all w-64" 
+              placeholder="Rechercher un contenu..." />
+          </div>
+          <button (click)="onFilter()" class="flex items-center gap-2 px-4 py-2 text-body-sm text-on-surface-variant border border-surface-variant/20 rounded-lg hover:bg-surface-container-low transition-colors">
+            <span class="material-symbols-outlined text-sm">filter_list</span>
+            Filtrer
+          </button>
+        </div>
+        <div class="text-body-sm text-on-surface-variant">
+          Affichage de <span class="font-bold text-on-surface">{{ totalContents }}</span> contenus
+        </div>
+      </div>
+
+      <!-- High-End Table -->
+      <table class="w-full text-left border-collapse">
+        <thead class="bg-surface-container-lowest">
+          <tr>
+            <th class="px-gutter py-4 font-label-md text-[12px] uppercase text-on-surface-variant tracking-widest opacity-60">Thumbnail</th>
+            <th class="px-gutter py-4 font-label-md text-[12px] uppercase text-on-surface-variant tracking-widest opacity-60">Title</th>
+            <th class="px-gutter py-4 font-label-md text-[12px] uppercase text-on-surface-variant tracking-widest opacity-60">Type</th>
+            <th class="px-gutter py-4 font-label-md text-[12px] uppercase text-on-surface-variant tracking-widest opacity-60">Views</th>
+            <th class="px-gutter py-4 font-label-md text-[12px] uppercase text-on-surface-variant tracking-widest opacity-60">Tokens</th>
+            <th class="px-gutter py-4 font-label-md text-[12px] uppercase text-on-surface-variant tracking-widest opacity-60">Date</th>
+            <th class="px-gutter py-4 font-label-md text-[12px] uppercase text-on-surface-variant tracking-widest opacity-60 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-variant/10">
+          <!-- Row Dynamique -->
+          <tr *ngFor="let item of catalogItems" class="hover:bg-surface-container-low/30 transition-colors group">
+            <td class="px-gutter py-4">
+              <div class="w-16 h-12 rounded-lg overflow-hidden border border-surface-variant/10 shadow-sm">
+                <img [alt]="item.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" [src]="item.thumbnail"/>
+              </div>
+            </td>
+            <td class="px-gutter py-4">
+              <span class="font-body-md font-medium text-on-surface">{{ item.title }}</span>
+              <p class="text-[12px] text-on-surface-variant opacity-60">{{ item.category }}</p>
+            </td>
+            <td class="px-gutter py-4">
+              <span 
+                class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter"
+                [ngClass]="item.type === 'Payant' ? 'soft-violet-tint' : 'bg-surface-container-highest text-on-surface-variant'">
+                {{ item.type }}
+              </span>
+            </td>
+            <td class="px-gutter py-4 font-body-md text-on-surface">
+              {{ item.views | number }}
+            </td>
+            <td class="px-gutter py-4">
+              <span *ngIf="item.tokens; else freeToken" class="font-medium text-primary">
+                {{ item.tokens | number }} <span class="text-[10px] opacity-60">LMN</span>
+              </span>
+              <ng-template #freeToken>
+                <span class="font-medium text-on-surface-variant opacity-40">—</span>
+              </ng-template>
+            </td>
+            <td class="px-gutter py-4 text-body-sm text-on-surface-variant">
+              {{ item.date }}
+            </td>
+            <td class="px-gutter py-4 text-right">
+              <div class="flex justify-end gap-2">
+                <button (click)="onEditPrice(item, $event)" class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all active:scale-90" title="Modifier le prix">
+                  <span class="material-symbols-outlined text-[20px]">edit</span>
+                </button>
+                <button (click)="onArchive(item, $event)" class="p-2 text-on-surface-variant hover:text-tertiary hover:bg-tertiary/5 rounded-full transition-all active:scale-90" title="Archiver">
+                  <span class="material-symbols-outlined text-[20px]">archive</span>
+                </button>
+                <button (click)="onDelete(item, $event)" class="p-2 text-on-surface-variant hover:text-secondary hover:bg-secondary/5 rounded-full transition-all active:scale-90" title="Dépublier">
+                  <span class="material-symbols-outlined text-[20px]">delete</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="px-gutter py-6 flex items-center justify-between bg-white/50">
+        <button class="px-4 py-2 text-body-sm font-medium text-on-surface-variant border border-surface-variant/20 rounded-lg hover:bg-surface-container-low transition-colors disabled:opacity-30" disabled>
+          Précédent
+        </button>
+        <div class="flex gap-2">
+          <button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white font-medium text-body-sm">1</button>
+          <button class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low text-body-sm">2</button>
+          <button class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low text-body-sm">3</button>
+          <span class="flex items-center justify-center px-1 text-on-surface-variant opacity-40">...</span>
+          <button class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low text-body-sm">12</button>
+        </div>
+        <button class="px-4 py-2 text-body-sm font-medium text-on-surface-variant border border-surface-variant/20 rounded-lg hover:bg-surface-container-low transition-colors">
+          Suivant
+        </button>
+      </div>
+    </div>
+
+    <!-- Global Footer Section -->
+    <footer class="mt-stack-lg pt-stack-lg border-t border-surface-variant/10 text-body-sm text-on-surface-variant/60 flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto px-0">
+      <span>© 2024 LUMINA. All rights reserved.</span>
+      <div class="flex gap-stack-md mt-4 md:mt-0">
+        <a class="hover:text-primary transition-colors underline-offset-4 hover:underline" href="#">Privacy Policy</a>
+        <a class="hover:text-primary transition-colors underline-offset-4 hover:underline" href="#">Terms of Service</a>
+        <a class="hover:text-primary transition-colors underline-offset-4 hover:underline" href="#">Cookie Policy</a>
+        <a class="hover:text-primary transition-colors underline-offset-4 hover:underline" href="#">Support</a>
+      </div>
+    </footer>
+  </main>
+</div>

@@ -1,0 +1,103 @@
+<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-md dark:bg-surface-dim/70 border-b border-outline-variant/15 shadow-sm">
+  <div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+    <div class="font-headline-md text-headline-md font-bold tracking-tight text-primary dark:text-inverse-primary">LUMINA</div>
+    <div class="hidden md:flex gap-8 items-center">
+      <a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md" href="#">Discover</a>
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-body-md text-body-md" href="#">Creators</a>
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-body-md text-body-md" href="#">Premium</a>
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-body-md text-body-md" href="#">About</a>
+    </div>
+    <div class="flex gap-4 items-center">
+      <button class="text-primary font-medium px-4 py-2 hover:bg-surface-container-low rounded-xl transition-all">Sign In</button>
+      <button class="carmin-gradient text-white px-6 py-2.5 rounded-full font-semibold shadow-md hover:scale-105 active:scale-95 transition-all">Get Started</button>
+    </div>
+  </div>
+</nav>
+
+<main class="pt-32 pb-24">
+  <header class="max-w-container-max mx-auto px-margin-desktop text-center mb-16">
+    <h1 class="font-headline-xl text-headline-xl mb-4 text-on-surface">Créateurs en Vogue</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+      Découvrez les esprits visionnaires qui définissent l'excellence sur LUMINA. Un écosystème où le talent rencontre l'exceptionnel.
+    </p>
+  </header>
+
+  <div class="max-w-container-max mx-auto px-margin-desktop mb-12">
+    <div class="flex flex-wrap justify-center gap-3">
+      <button 
+        *ngFor="let cat of categories"
+        (click)="setFilter(cat)"
+        [ngClass]="currentFilter === cat ? 'active-filter' : 'bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant'"
+        class="px-6 py-2 rounded-full border border-outline-variant/15 text-label-md font-label-md transition-all cursor-pointer"
+      >
+        {{ cat }}
+      </button>
+        <a routerLink="/discover/search" class="cursor-pointer text-on-surface-variant hover:text-primary px-4 py-3 flex items-center space-x-3 transition-all duration-200 hover:bg-surface-container-low rounded-lg" >
+            <span class="material-symbols-outlined">search</span>
+            <span class="font-label-md text-label-md">Search</span>
+        </a>
+    </div>
+  </div>
+
+  <section class="max-w-container-max mx-auto px-margin-desktop">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+      
+      <article routerLink="/creator/profile" *ngFor="let creator of filteredCreators" class="glass-card rounded-[14px] overflow-hidden flex flex-col h-full group">
+        <div class="relative h-[320px] overflow-hidden">
+          <img 
+            [src]="creator.imageUrl" 
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+            [attr.alt]="'Portrait de ' + creator.name"
+          />
+          <div class="absolute top-4 left-4">
+            <span class="bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-full text-[12px] font-semibold text-primary uppercase tracking-wider">
+              {{ creator.category }}
+            </span>
+          </div>
+        </div>
+        
+        <div class="p-stack-lg flex flex-col flex-grow">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-headline-sm text-headline-sm text-on-surface">{{ creator.name }}</h3>
+            <span *ngIf]="creator.verified" class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">
+              verified
+            </span>
+          </div>
+          <p class="text-primary/70 text-body-sm font-semibold mb-4">{{ creator.subscribers }} Abonnés</p>
+          <p class="text-on-surface-variant text-body-sm line-clamp-2 mb-6">{{ creator.description }}</p>
+          <div class="mt-auto">
+            <button 
+              (click)="viewProfile(creator)"
+              class="w-full py-3 rounded-xl border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-colors duration-300 cursor-pointer"
+            >
+              Voir le Profil
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="mt-24 max-w-container-max mx-auto px-margin-desktop text-center">
+    <div class="glass-card p-12 rounded-3xl border border-primary/10">
+      <h2 class="font-headline-md text-headline-md mb-4">Prêt à rejoindre l'élite ?</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant max-w-lg mx-auto mb-8">
+        Partagez vos créations et connectez-vous avec une communauté d'esprits raffinés.
+      </p>
+      <button class="carmin-gradient text-white px-8 py-3.5 rounded-full font-semibold shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer">
+        Créer un compte de créateur
+      </button>
+    </div>
+  </section>
+</main>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,332 @@
+<!-- Desktop SideNavBar -->
+
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest/80 backdrop-blur-xl border-r border-outline-variant/15 p-6 space-y-stack-md z-50">
+    <div class="mb-stack-lg">
+        <h1 routerLink="" class="font-headline-md text-headline-md text-primary">LUMINA</h1>
+        <p class="font-body-sm text-body-sm text-on-surface-variant opacity-70">Luxury Curator</p>
+    </div>
+    <nav class="flex-1 flex flex-col space-y-1">
+        <a class="bg-surface-container text-primary font-medium rounded-lg px-4 py-3 flex items-center space-x-3 transition-all duration-200" >
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+            <span class="font-label-md text-label-md">Home</span>
+        </a>
+        <a routerLink="/subscriber/dashboard-subscriber" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-all hover:translate-x-1 duration-200" href="#">
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a routerLink="/discover/creator" class="text-on-surface-variant hover:text-primary px-4 py-3 flex items-center space-x-3 transition-all duration-200 hover:bg-surface-container-low rounded-lg" >
+            <span class="material-symbols-outlined">explore</span>
+            <span class="font-label-md text-label-md">Explore</span>
+        </a>
+        <a routerLink="/subscriber/subscriptions" class="text-on-surface-variant hover:text-primary px-4 py-3 flex items-center space-x-3 transition-all duration-200 hover:bg-surface-container-low rounded-lg" >
+            <span class="material-symbols-outlined">subscriptions</span>
+            <span class="font-label-md text-label-md">Subscriptions</span>
+        </a>
+        <a routerLink="/chat/chat" class="text-on-surface-variant hover:text-primary px-4 py-3 flex items-center space-x-3 transition-all duration-200 hover:bg-surface-container-low rounded-lg" >
+            <span class="material-symbols-outlined">chat_bubble</span>
+            <span class="font-label-md text-label-md">Messages</span>
+        </a>
+        <a routerLink="/payment/wallet_dashboard" class="text-on-surface-variant hover:text-primary px-4 py-3 flex items-center space-x-3 transition-all duration-200 hover:bg-surface-container-low rounded-lg" >
+            <span class="material-symbols-outlined">account_balance_wallet</span>
+            <span class="font-label-md text-label-md">Wallet</span>
+        </a>
+        <a routerLink="/profile/edit" class="text-on-surface-variant hover:text-primary px-4 py-3 flex items-center space-x-3 transition-all duration-200 hover:bg-surface-container-low rounded-lg" >
+            <span class="material-symbols-outlined">person</span>
+            <span class="font-label-md text-label-md">Profile</span>
+        </a>
+        <a routerLink="/discover/search" class="text-on-surface-variant hover:text-primary px-4 py-3 flex items-center space-x-3 transition-all duration-200 hover:bg-surface-container-low rounded-lg" >
+            <span class="material-symbols-outlined">search</span>
+            <span class="font-label-md text-label-md">Search</span>
+        </a>
+    </nav>
+    <button class="mt-auto carmin-gradient text-white font-label-md text-label-md py-4 rounded-xl shadow-lg active:scale-95 transition-transform">
+        Deposit
+    </button>
+</aside>
+
+<!-- End Desktop SideNavBar -->
+
+<!-- TopNavBar for Mobile -->
+
+<header class="md:hidden flex justify-between items-center w-full px-margin-mobile py-4 sticky top-0 z-50 bg-surface/70 backdrop-blur-md border-b border-outline-variant/15">
+    <h1 class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight">LUMINA</h1>
+    <div class="flex items-center space-x-4">
+     <span class="material-symbols-outlined text-primary">notifications</span>
+     <div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+         <img alt="Profile" data-alt="A professional close-up portrait of a woman with a confident expression, set against a soft-focus architectural background with warm, sunset lighting. The overall aesthetic is refined and upscale, with a focus on high-end lifestyle fashion and a luminous, clear complexion." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNg_EUaX9C0ZA3kl9mGcsksHAmPJdfrEkX-vvLrn1deXdZtlM-1Sa8XIl4g8FMzBQdoK9dQ4NcS_rYh3i9bRwKar228ngBjrjT5417RrRdRUCXtpYTecMJ3htFjrVRa8ClX5kA5HRgnFp2u5xVr6_CKAXOHaBazugkizeJuSY6AcV6jk2QT3IlkRWcG-3IIQGBaMminO4fWaYtXIhDfrdVvZRi-xaMp9YIZ68yFMTTHMs449ls4tHGcC2VVUcglcVnL83_N4-eOF8"/>
+     </div>
+    </div>
+</header>
+
+<!-- End TopNavBar for Mobile -->
+
+<!-- Main Content Layout -->
+
+<div class="md:ml-64 flex flex-col lg:flex-row min-h-screen">
+
+    <!-- Main Feed (Center) -->
+
+    <main class="flex-1 px-margin-mobile md:px-margin-desktop py-stack-lg max-w-4xl mx-auto w-full">
+        <header class="mb-stack-lg flex flex-col md:flex-row md:items-center md:justify-between gap-6 w-full">
+        <div class="md:max-w-xl">
+            <h2 class="font-headline-lg text-headline-lg text-on-background">Bonjour, Julianna</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant">Here is what your favorite creators shared today.</p>
+        </div>
+
+        <div class="w-full md:w-80 md:ml-auto relative">
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/60">
+            search
+            </span>
+            <input 
+            type="text" 
+           
+            placeholder="Rechercher un créateur..." 
+            class="w-full pl-12 pr-10 py-3 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md transition-all placeholder:text-on-surface-variant/50"
+            />
+            <button 
+             
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/60 hover:text-primary transition-colors cursor-pointer"
+            >
+            <span class="material-symbols-outlined text-[18px]">close</span>
+            </button>
+        </div>
+        </header>
+        <!-- Stories Row -->
+
+        <section class="flex space-x-gutter overflow-x-auto pb-stack-md mb-stack-lg no-scrollbar">
+            <!-- Story Items -->
+
+            <div class="flex-shrink-0 flex flex-col items-center space-y-2 group cursor-pointer">
+                <div class="p-1 rounded-full border-2 border-primary-container group-hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-surface">
+                    <img alt="Creator" data-alt="Close-up of a stylish male creator with curated facial hair, wearing a high-fashion silk shirt. The lighting is editorial, with soft purple and pink hues reflecting off a glass surface in the background, maintaining a premium, light-luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnEX85TH_oubJMGRuULZB4OWwcp6Y-a3aRtb0CdJLEpdMG2bR50ljLYqRXax59Z39Urr921f2uAls-8Tq8eBMgMZfqDD-tY1mHC_XeK6orye8QF0JTUBWXWexiythovMCyJYvZFdE-KpBlM8ncrhB-n0gBjJ2NcSmeH97u7PliaXWRAzgT8kReiMK7wMqsMca5XFzO6O1tLzAOym7n5jXlzA80yBMkTqjcE4A5MO0IylsxDyh9Dd6KWbxk0h7DHScUZgIHFPnx-YM"/>
+                    </div>
+                </div>
+                <span class="font-label-md text-label-md text-on-surface-variant">Elena.V</span>
+            </div>
+            <div class="flex-shrink-0 flex flex-col items-center space-y-2 group cursor-pointer">
+                <div class="p-1 rounded-full border-2 border-outline-variant group-hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-surface">
+                        <img alt="Creator" data-alt="A portrait of a minimalist architect in a bright, white studio. The lighting is incredibly clean and high-key, emphasizing the serene and luxury focus of the environment. The color palette is dominated by whites and soft grays with subtle violet shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM-XtVVLRr7N-oLGhsuicL4HXpLV5U-y8-sDxU4lbFGmRVNJh66nZ9QDeuLpvJec3XSRdlz2W7A_7-MibfobHYtqW71KQ2Tktmhc8mYJCQ2duyZuP2uL9Qgk-bBXvgztQNFuQL6c0Z1IOoJDa2dKXm8HNSwVj8lJ-Rf7YvaDXG5ypyiMNMALBAkGFUdFlMXT0NzNIphGUDNkkeGG6s3-56nCD-J1a1Cz_9eZ8Od3Ifna54W9mdwZ1EvyR6OOjX9JTIBzlgxJID7YY"/>
+                    </div>
+                </div>
+                <span class="font-label-md text-label-md text-on-surface-variant">Marcus.K</span>
+            </div>
+
+            <!-- Repeaters for visual fullness -->
+
+            <div class="flex-shrink-0 flex flex-col items-center space-y-2 group cursor-pointer">
+                <div class="p-1 rounded-full border-2 border-primary-container group-hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-surface">
+                        <img alt="Creator" data-alt="An editorial fashion portrait of a woman with a sleek hairstyle, looking directly at the camera. The background is a soft, translucent violet glass, creating a sense of deep artistic luxury. Lighting is soft and directional, accentuating high-fashion features." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVn46kzalKGixOFxDWXGXVVL2VAQhwCTVzlTIRVvHGPNFFGIBsFjG3lxLKTcsqdx-7I-VaZlYBFCQc55fmyCfXj_vNofpBPyetc-OIP1tessuI4_HwKV4pyrDGNz20JPaRMu14sMnbpfTbJy79cW0CikW48gR02z7g_6VN58sPWC8yNZ02sc867DmJ2GVGAIdxiFoteexBJs1_aWnSUVPja-BRSCrCUZCYqLYZg_b1TN3yb5NYMdSoSRhWla2JsnWFoYVuT5tdY7g"/>
+                    </div>
+                </div>
+                <span class="font-label-md text-label-md text-on-surface-variant">Sasha_L</span>
+            </div>
+            <div class="flex-shrink-0 flex flex-col items-center space-y-2 group cursor-pointer">
+                <div class="p-1 rounded-full border-2 border-outline-variant group-hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-surface">
+                        <img alt="Creator" data-alt="A portrait of a young creative professional sitting in a sun-drenched, high-ceilinged room with white walls and subtle gold accents. The atmosphere is calm and prestigious, with a light-mode color palette of creams, whites, and very faint lavender tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX_Q-zBkMqLGYZl9goi2NIJ_SiyVrlaRr3J3f51Gnbzk7indI1e_1BwnMHQR7z2xoWZKF4dW_qIx0VIscCiXq9OAhSFibkGq3rzaQXzMZca6JDg-Dq5C2g9tthlPLohFrX4Fxywqy7J-HaD0oG5qJ9HBnIit3JYcArw67QrH6_kuzsk3ykNvhcCHaha7FYUVzhdILCxfHbeGVPBuI9Por_S4JkTif28QJpM0L_UDiQkTMGNWP7TqGE0lyvPKH4QbFImzO70CZxXwY"/>
+                    </div>
+                </div>
+                <span class="font-label-md text-label-md text-on-surface-variant">Ollie_Arts</span>
+            </div>
+        </section>
+
+        <!--End Stories Row -->
+
+        <!-- Feed Grid -->
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+
+            <!-- Content Card 1 -->
+
+            <div class="glass-card rounded-[14px] p-6 luxury-shadow transition-all duration-300 flex flex-col">
+                <div class="relative w-full aspect-square rounded-xl overflow-hidden mb-4">
+                    <img alt="Luxury Villa" class="w-full h-full object-cover" data-alt="A breathtaking view of a modern luxury villa overlooking the Mediterranean Sea at dawn. The architecture is minimalist with clean white lines and glass walls. The morning light is soft, casting a gentle violet glow over the infinity pool and the surrounding lush greenery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMlX-9Zwobn3B20DTt1UwiGtoc9a7zlg7ncEDfC0ZUQp0Qsu8ttTWSunnqvWPbX2BNZXRUeHplQbn_W24kDjz6fgkRNZFahrFQ3JOUkR-smC-hnSrB4Zy0Iyed2vWWquWeXbcVDN2tyjGi-iMx2S8tFOeGxZGpHOFZ8150vRTGfZDOwYN_sSupu6FFV8YgjrzUeAQaxyoETJ6C8Ay0Tn_grXSA9eTdQT80xqXNeGxp9bVoYRF5698B2MhrCfZRLTQODcOUYk3Gqtg"/>
+                    <span class="absolute top-4 right-4 bg-secondary text-white font-label-md text-[10px] px-2 py-1 rounded-full tracking-widest uppercase">Paid</span>
+                </div>
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-6 h-6 rounded-full overflow-hidden">
+                            <img alt="Creator" data-alt="Portrait of a stylist. High contrast lighting with soft violet accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjyqa9MQ1tZm707EnQF-9hbAy56--ebCHxtPMOTyXjV94_SF-leSTi6nY2RxNkoLKXON-20vB7AEdOLrskmz17FpMh_CMRqAGXwBTrMT5J4uv60VfLNAO5zfqZYMa4daqs5VE5npnh46yzPcVWMIa-NmBf0q6Nmfsfz2HPkyGPQ51EipXfa6ROvucdrUgM_hmB98EzzFqnjkXxq7-uFr23UbJEtGoWAMfVqr-pLBG19I9A1K7HKdwZDdybTFFEf0ohSWKCn0RPKUg"/>
+                        </div>
+                        <span class="font-label-md text-label-md text-primary">Elena.V</span>
+                    </div>
+                    <span class="font-body-sm text-body-sm text-on-surface-variant">2h ago</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm mb-2">The Hidden Sanctuary</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant flex-1 mb-4">An exclusive look into my latest architectural curation in the hills of Tuscany...</p>
+                <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+                    <div class="flex items-center space-x-4">
+                        <button class="flex items-center space-x-1 text-on-surface-variant hover:text-secondary transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">favorite</span>
+                            <span class="text-label-md">1.2k</span>
+                        </button>
+                        <button class="flex items-center space-x-1 text-on-surface-variant hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">comment</span>
+                            <span class="text-label-md">84</span>
+                        </button>
+                    </div>
+                    <span class="material-symbols-outlined text-on-surface-variant cursor-pointer">bookmark</span>
+                </div>
+            </div>
+
+            <!--End Content Card 1 -->
+
+            <!-- Content Card 2 -->
+
+            <div class="glass-card rounded-[14px] p-6 luxury-shadow transition-all duration-300 flex flex-col">
+                <div class="relative w-full aspect-square rounded-xl overflow-hidden mb-4">
+                    <img alt="Interior Design" class="w-full h-full object-cover" data-alt="A close-up of high-end silk textiles and designer furniture in a luminous, sun-lit apartment. The palette is creamy white and soft beige with deep violet accents in the pillows. The mood is incredibly serene, luxurious, and fashion-forward." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjY-HNaWKguAoWUd9K_aCl7hwxWaLNtwL5RbILk2yPYIF2xax4GXjtTNjSSd7hRh0WqIUhJRMQEotZLjEP3uxDorMzlnn9pjPdVewRpEXG0l3KvJGuS_4vrj8f34KOhA8Joa52jhfaT7DLPVQvlidPwKfq67F1mnGqeYoiZJtC0EelloSAmUafwNnUONAR6ve2iAwPbQz5kmcQn_qE-QyEK9lvTqO6dluMN2Z1vwAMH13GT6VsvdbFbthHpq4WdvJFxBRmLEVQNeA"/>
+                    <span class="absolute top-4 right-4 bg-secondary text-white font-label-md text-[10px] px-2 py-1 rounded-full tracking-widest uppercase">Paid</span>
+                </div>
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-6 h-6 rounded-full overflow-hidden">
+                            <img alt="Creator" data-alt="Fashion editor portrait. Soft-key lighting, editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwURm3of0z_DnccGO6DR5jYqa2S1MvQ-S8QRGkLRKXinPMTg2A9NdelRJUCZdXaZsOnEI8y6mJIP373VwNHmmEtUzneE5OiNKi85XjEUaKIj3vnZP6_xGl1CVudbmyQZ4Dr19RMjPvarnYAZONi9graVOnUtBbN6guJg0uIUJOWgHsWVd-_IR-cDWTK8Cx-1-8buRuzMUHgeFBSJ--6dmLkVxshv5lGo3mmmY334qWN2grZIUOaWSagYqdvQxB_px3j7eyYWc952E"/>
+                        </div>
+                        <span class="font-label-md text-label-md text-primary">Sasha_L</span>
+                    </div>
+                    <span class="font-body-sm text-body-sm text-on-surface-variant">5h ago</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm mb-2">Velvet & Silk</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant flex-1 mb-4">Curating the winter collection textures for the upcoming private gala in Milan.</p>
+                <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+                    <div class="flex items-center space-x-4">
+                        <button class="flex items-center space-x-1 text-on-surface-variant hover:text-secondary transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">favorite</span>
+                            <span class="text-label-md">2.5k</span>
+                        </button>
+                        <button class="flex items-center space-x-1 text-on-surface-variant hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">comment</span>
+                            <span class="text-label-md">112</span>
+                        </button>
+                    </div>
+                    <span class="material-symbols-outlined text-on-surface-variant cursor-pointer">bookmark</span>
+                </div>
+            </div>
+
+            <!--End Content Card 2 -->
+
+            <!-- Content Card 3 (Non-paid example) -->
+
+            <div class="glass-card rounded-[14px] p-6 luxury-shadow transition-all duration-300 flex flex-col md:col-span-2 lg:col-span-1">
+                <div class="relative w-full aspect-video rounded-xl overflow-hidden mb-4">
+                    <img alt="Fashion Show" class="w-full h-full object-cover" data-alt="A wide-angle shot of a minimalist high-fashion runway show set in a grand, white-walled hall. Models are blurred in motion, wearing flowing monochromatic garments. The lighting is dramatic yet soft, with clear highlights and deep shadows that emphasize the high-end luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxtQjcadJEGBlm12kP62o6Xv3qgP-C2zoGRTYX6tbXhK5DjkDNonzjaj3pX7erX1Tap7ZdHMIkRqpKlDNOQIh6BJX4HQKUQh7HtuF8_Nrynk52Ewi9xYWEFfg7z7AotoI_zLgruP-LErki1CBqXvKJXuysRyKHDwd-OAIKV2lyxlA0VGQsjpTEts-Ltss5oz4KuK-kdLI9LdzbzQh8n83C-cjA-HO9-01ACmXfjV5wZ79YpAXoV5y3I15-ue1gRH8oN0lV5eez9Pw"/>
+                </div>
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-6 h-6 rounded-full overflow-hidden">
+                            <img alt="Creator" data-alt="Minimalist designer portrait. Clean studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk4B1yjjieH_A5DKe-9Q6s8j5gS2dFS4Bj6sZVvf5vb7pvFAyKGigLcL16-5jHPT9dwFzoZU6b1ujQdc9JfbEch2ijevZKgnt0QbkH4dgTN3yOyaaPoMXodUroe0_uyYFerWeG6TcHVr_qRJr5DftGAnkyqoSi95b1rgyYYZQiP2DNQS_wpk_K-ps_DYEZdS7nuGwIYKyduvwj5ZmCDiECb-xqMwFt-A_6I79gJn-vuSs4df8MwCcphlxKjIOLsB_B8gYfkmRkYoI"/>
+                        </div>
+                        <span class="font-label-md text-label-md text-primary">Marcus.K</span>
+                    </div>
+                    <span class="font-body-sm text-body-sm text-on-surface-variant">8h ago</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm mb-2">Minimalist Flow</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant flex-1 mb-4">A study on movement and negative space in the SS24 Paris collection.</p>
+                <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+                    <div class="flex items-center space-x-4">
+                        <button class="flex items-center space-x-1 text-on-surface-variant hover:text-secondary transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">favorite</span>
+                            <span class="text-label-md">940</span>
+                        </button>
+                        <button class="flex items-center space-x-1 text-on-surface-variant hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">comment</span>
+                            <span class="text-label-md">32</span>
+                        </button>
+                    </div>
+                    <span class="material-symbols-outlined text-on-surface-variant cursor-pointer">bookmark</span>
+                </div>
+            </div>
+
+            <!--End Content Card 3 (Non-paid example) -->
+        </section>
+    </main>
+
+    <!-- Right Sidebar (Suggested & Trending) -->
+
+    <aside class="hidden lg:flex flex-col w-[360px] p-6 space-y-stack-lg border-l border-outline-variant/15 bg-surface-container-low/30">
+        
+        <!-- Suggested Creators -->
+
+        <section>
+            <h3 class="font-label-md text-label-md text-primary mb-stack-md tracking-wider uppercase">Suggested Creators</h3>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between group">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/20">
+                            <img alt="Creator" data-alt="A portrait of a renowned jewelry designer in their studio, surrounded by sparkling gems and delicate silver chains. The lighting is sophisticated, using multiple soft points to create a shimmering, high-end atmosphere. The colors are predominantly cool whites and soft purples." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjprvjIAlgkYzWqyvKet5OruMjA3o9iTLW_3Xls5PWMJ9N_wsBQuw2oo8nKwD7wXMmalwcDo0CcErG4ZS35o7C8Kbb8GHrDE7a60gjdW6YXPfkcTtUyXwj55s7CW4KEC9HOjAj0pJGozFyAuazFER8yoVgYis9Vh6ib3D4MYJDbwj1wMuxs8pl8RiLWfXU7GwMmGvkcmZVk5Mx5mz96iSiovdem2MUEjIvDJCkN7Znvojz133m3koLL3mDlbPPMVyrYCbtX-marrw"/>
+                        </div>
+                    <div>
+                    <p class="font-label-md text-label-md leading-none">Claire_Designs</p>
+                    <p class="text-[11px] text-on-surface-variant">Jewelry Artisan</p>
+                </div>
+            </div>
+            <button class="text-secondary border border-secondary/20 px-3 py-1.5 rounded-full text-[12px] font-medium hover:bg-secondary hover:text-white transition-all">Follow</button>
+            </div>
+            <div class="flex items-center justify-between group">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/20">
+                        <img alt="Creator" data-alt="A portrait of a male fine art photographer in a sleek, minimalist gallery. He is standing next to a large-scale abstract painting. The environment is bright and high-ceilinged, emphasizing luxury and artistic prestige. Palette consists of whites, grays, and deep magenta accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1NBMeWJ-ViD9TK60odKzwxzU5vVlyYBJpl0Gj9xEzlue_nD5mvyr07aPbkEKkSJBIJva_FXL5CzJ52XySs5jE3OhZZYWrJSS9NKu-A_U3UhyCWjeGKOqRsB-9yltO7Llm0T3ncAPHRZVKrSG6V7EupX-uJTNCuA9N0bC0XRMSpV_ffMG_CZpNqWgw_kFUlOOPur6jAL5q1g2r8HNelqyPGPHgT0jlPa_N7klLoMVnHiT1yCQyJ2u9gKcuJmXNsk0dSDzQ9BBiSOc"/>
+                    </div>
+                    <div>
+                        <p class="font-label-md text-label-md leading-none">Arthur_Visuals</p>
+                        <p class="text-[11px] text-on-surface-variant">Fine Art Photo</p>
+                    </div>
+                </div>
+                <button class="text-secondary border border-secondary/20 px-3 py-1.5 rounded-full text-[12px] font-medium hover:bg-secondary hover:text-white transition-all">Follow</button>
+            </div>
+            </div>
+        </section>
+
+        <!-- Trending Tags -->
+
+        <section>
+            <h3 class="font-label-md text-label-md text-primary mb-stack-md tracking-wider uppercase">Trending Tags</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="bg-surface-container-high/50 text-primary-container px-3 py-1.5 rounded-full text-[12px] font-medium cursor-pointer hover:bg-primary-fixed transition-colors">#RivieraLife</span>
+                <span class="bg-surface-container-high/50 text-primary-container px-3 py-1.5 rounded-full text-[12px] font-medium cursor-pointer hover:bg-primary-fixed transition-colors">#SilkCuration</span>
+                <span class="bg-surface-container-high/50 text-primary-container px-3 py-1.5 rounded-full text-[12px] font-medium cursor-pointer hover:bg-primary-fixed transition-colors">#ArtBasel</span>
+                <span class="bg-surface-container-high/50 text-primary-container px-3 py-1.5 rounded-full text-[12px] font-medium cursor-pointer hover:bg-primary-fixed transition-colors">#MinimalistHome</span>
+                <span class="bg-surface-container-high/50 text-primary-container px-3 py-1.5 rounded-full text-[12px] font-medium cursor-pointer hover:bg-primary-fixed transition-colors">#HauteCouture</span>
+            </div>
+        </section>
+
+        <!-- Live Event Card -->
+
+        <section>
+            <div class="bg-secondary-container/10 border border-secondary/15 rounded-2xl p-5 relative overflow-hidden group cursor-pointer">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full -mr-8 -mt-8"></div>
+                <div class="flex items-center space-x-2 text-secondary mb-3">
+                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                    <span class="font-label-md text-[10px] uppercase tracking-widest font-bold">Live Event</span>
+                </div>
+                <h4 class="font-headline-sm text-[20px] mb-2 leading-tight">Milan Fashion Week: Backstage Access</h4>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Join Elena.V for an exclusive live stream from the atelier.</p>
+                <button class="w-full carmin-gradient text-white py-3 rounded-xl font-label-md text-[13px] shadow-sm group-hover:shadow-md transition-shadow">Enter Lounge</button>
+            </div>
+        </section>
+    </aside>
+</div>
+
+<!-- Mobile Navigation Bar -->
+
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface/90 backdrop-blur-md flex justify-around items-center py-4 px-6 border-t border-outline-variant/10 z-50">
+    <a class="text-primary flex flex-col items-center" >
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+    </a>
+    <a class="text-on-surface-variant flex flex-col items-center" >
+        <span class="material-symbols-outlined">explore</span>
+    </a>
+    <a class="text-on-surface-variant flex flex-col items-center" >
+        <span class="material-symbols-outlined">add_circle</span>
+    </a>
+    <a class="text-on-surface-variant flex flex-col items-center" >
+        <span class="material-symbols-outlined">chat_bubble</span>
+    </a>
+    <a class="text-on-surface-variant flex flex-col items-center" >
+        <span class="material-symbols-outlined">person</span>
+    </a>
+</nav>

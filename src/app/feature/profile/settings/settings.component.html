@@ -1,0 +1,204 @@
+<header class="w-full sticky top-0 z-40 bg-white/70 backdrop-blur-xl border-b border-surface-variant/15 shadow-sm flex justify-between items-center px-margin-desktop py-4">
+  <div class="flex items-center gap-8">
+    <span class="font-headline-md text-headline-md text-primary tracking-tight">LUMINA</span>
+    <div class="hidden md:flex gap-6">
+      <span class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-label-md text-label-md">Dashboard</span>
+      <span class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-label-md text-label-md">Catalog</span>
+      <span class="text-primary font-medium font-label-md text-label-md">Settings</span>
+    </div>
+  </div>
+  <div class="flex items-center gap-4">
+    <div class="material-symbols-outlined text-primary cursor-pointer active:scale-95 transition-transform p-2 hover:bg-surface-container-low rounded-full">notifications</div>
+    <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white cursor-pointer active:scale-95 transition-transform overflow-hidden">
+      <svg class="w-full h-full text-primary-fixed bg-surface-container-highest" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<div class="flex max-w-container-max mx-auto min-h-[calc(100vh-72px)]">
+  <aside class="hidden md:flex flex-col gap-stack-md p-gutter h-auto w-64 border-r border-surface-variant/15 bg-surface-bright/80 backdrop-blur-md">
+    <div class="mb-4">
+      <h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest opacity-60">Creator Hub</h2>
+      <p class="font-body-sm text-body-sm text-primary">Premium Tier</p>
+    </div>
+    <nav class="flex flex-col gap-2">
+      <div class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-all cursor-pointer hover:translate-x-1 duration-200">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span class="font-label-md text-label-md">Dashboard</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-all cursor-pointer hover:translate-x-1 duration-200">
+        <span class="material-symbols-outlined">folder_copy</span>
+        <span class="font-label-md text-label-md">Catalog</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-all cursor-pointer hover:translate-x-1 duration-200">
+        <span class="material-symbols-outlined">account_balance_wallet</span>
+        <span class="font-label-md text-label-md">Wallet</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-all cursor-pointer hover:translate-x-1 duration-200">
+        <span class="material-symbols-outlined">chat_bubble</span>
+        <span class="font-label-md text-label-md">Messages</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 bg-surface-container text-primary font-semibold rounded-lg transition-all cursor-pointer hover:translate-x-1 duration-200">
+        <span class="material-symbols-outlined">settings</span>
+        <span class="font-label-md text-label-md">Settings</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-all cursor-pointer hover:translate-x-1 duration-200">
+        <span class="material-symbols-outlined">admin_panel_settings</span>
+        <span class="font-label-md text-label-md">Admin tools</span>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="flex-1 px-6 md:px-margin-desktop py-stack-lg">
+    <header class="mb-stack-lg">
+      <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Paramètres de Sécurité</h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Gérez la sécurité de votre compte LUMINA, vos préférences de confidentialité et le contrôle de vos données.</p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+      <section class="lg:col-span-7 glass-card p-stack-lg flex flex-col gap-6">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="material-symbols-outlined text-primary">lock_reset</span>
+          <h3 class="font-headline-sm text-headline-sm">Changer le mot de passe</h3>
+        </div>
+        
+        <form [formGroup].="passwordForm" (ngSubmit)="onUpdatePassword()" class="space-y-4 flex flex-col gap-6">
+          <div class="flex flex-col gap-2" [ngClass]="{'scale-[1.01] transition-transform': activeFocus['currentPassword']}">
+            <label class="font-label-md text-label-md text-on-surface-variant">Mot de passe actuel</label>
+            <input 
+              formControlName="currentPassword"
+              class="input-luxe px-4 py-3 rounded-xl w-full text-on-surface" 
+              placeholder="••••••••" 
+              type="password"
+              (focus)="setFocus('currentPassword', true)"
+              (blur)="setFocus('currentPassword', false)"
+            />
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-2" [ngClass]="{'scale-[1.01] transition-transform': activeFocus['newPassword']}">
+              <label class="font-label-md text-label-md text-on-surface-variant">Nouveau mot de passe</label>
+              <input 
+                formControlName="newPassword"
+                class="input-luxe px-4 py-3 rounded-xl w-full text-on-surface" 
+                placeholder="••••••••" 
+                type="password"
+                (focus)="setFocus('newPassword', true)"
+                (blur)="setFocus('newPassword', false)"
+              />
+            </div>
+            <div class="flex flex-col gap-2" [ngClass]="{'scale-[1.01] transition-transform': activeFocus['confirmPassword']}">
+              <label class="font-label-md text-label-md text-on-surface-variant">Confirmer le nouveau</label>
+              <input 
+                formControlName="confirmPassword"
+                class="input-luxe px-4 py-3 rounded-xl w-full text-on-surface" 
+                placeholder="••••••••" 
+                type="password"
+                (focus)="setFocus('confirmPassword', true)"
+                (blur)="setFocus('confirmPassword', false)"
+              />
+            </div>
+          </div>
+
+          <button 
+            type="submit" 
+            [disabled]="passwordForm.invalid"
+            class="btn-gradient self-start px-8 py-3 rounded-full text-white font-label-md text-label-md shadow-lg shadow-secondary/20 disabled:opacity-50 disabled:scale-100 disabled:pointer-events-none"
+          >
+            Mettre à jour le mot de passe
+          </button>
+        </form>
+      </section>
+
+      <div class="lg:col-span-5 flex flex-col gap-gutter">
+        <section class="glass-card p-stack-lg">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="material-symbols-outlined text-primary">notifications_active</span>
+            <h3 class="font-headline-sm text-headline-sm">Notifications</h3>
+          </div>
+          
+          <form [formGroup]="notificationForm" class="space-y-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="font-label-md text-label-md text-on-surface">Email Marketing</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Restez informé de nos offres exclusives</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer transition-transform duration-200" [ngClass]="{'scale-105': notificationForm.get('emailMarketing')?.value}">
+                <input formControlName="emailMarketing" class="sr-only peer" type="checkbox"/>
+                <div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              </label>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="font-label-md text-label-md text-on-surface">Push Mobile</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Alertes en temps réel sur votre activité</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer transition-transform duration-200" [ngClass]="{'scale-105': notificationForm.get('pushMobile')?.value}">
+                <input formControlName="pushMobile" class="sr-only peer" type="checkbox"/>
+                <div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              </label>
+            </div>
+          </form>
+        </section>
+
+        <section class="glass-card p-stack-lg">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="material-symbols-outlined text-primary">language</span>
+            <h3 class="font-headline-sm text-headline-sm">Langue</h3>
+          </div>
+          
+          <form [formGroup]="languageForm" class="relative" [ngClass]="{'scale-[1.01] transition-transform': activeFocus['language']}">
+            <select 
+              formControlName="currentLanguage"
+              class="input-luxe w-full px-4 py-3 rounded-xl appearance-none text-on-surface font-body-md cursor-pointer"
+              (focus)="setFocus('language', true)"
+              (blur)="setFocus('language', false)"
+            >
+              <option *ngFor="let lang of languages" [value]="lang.label">{{ lang.label }}</option>
+            </select>
+            <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+          </form>
+        </section>
+      </div>
+
+      <section class="lg:col-span-6 glass-card p-stack-lg">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="material-symbols-outlined text-primary">policy</span>
+          <h3 class="font-headline-sm text-headline-sm">Confidentialité &amp; RGPD</h3>
+        </div>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-6">Vous avez le contrôle total sur vos données personnelles. Téléchargez une copie de vos informations à tout moment.</p>
+        <button (click)="onDownloadData()" class="flex items-center gap-2 px-6 py-3 rounded-xl border border-primary text-primary font-label-md text-label-md hover:bg-surface-container-low transition-colors active:scale-95">
+          <span class="material-symbols-outlined text-sm">download</span>
+          Télécharger mes données (.json)
+        </button>
+      </section>
+
+      <section class="lg:col-span-6 glass-card p-stack-lg bg-error-container/10 border-error/20">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="material-symbols-outlined text-error">report</span>
+          <h3 class="font-headline-sm text-headline-sm text-error">Zone de danger</h3>
+        </div>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-6">La suppression de votre compte est irréversible. Toutes vos données seront effacées définitivement de nos serveurs.</p>
+        <button (click)="onDeleteAccount()" class="px-6 py-3 rounded-xl border border-error/30 text-error font-label-md text-label-md hover:bg-error-container/30 transition-all active:scale-95">
+          Supprimer mon compte
+        </button>
+      </section>
+    </div>
+  </main>
+</div>
+
+<footer class="w-full py-stack-lg border-t border-surface-variant/10 bg-surface-container-lowest mt-12">
+  <div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-4">
+    <span class="font-headline-sm text-headline-sm text-primary">LUMINA</span>
+    <div class="flex gap-stack-md">
+      <span class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary cursor-pointer transition-colors hover:underline underline-offset-4">Privacy Policy</span>
+      <span class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary cursor-pointer transition-colors hover:underline underline-offset-4">Terms of Service</span>
+      <span class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary cursor-pointer transition-colors hover:underline underline-offset-4">Cookie Policy</span>
+      <span class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary cursor-pointer transition-colors hover:underline underline-offset-4">Support</span>
+    </div>
+    <span class="font-body-sm text-body-sm text-on-surface-variant opacity-60">© 2026 LUMINA. All rights reserved.</span>
+  </div>
+</footer>

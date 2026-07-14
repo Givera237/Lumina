@@ -1,0 +1,146 @@
+<div class="min-h-screen font-body-md text-on-surface overflow-x-hidden relative pb-12">
+  
+  <!-- Top Navigation Bar -->
+  <header class="w-full sticky top-0 z-40 bg-white/70 backdrop-blur-xl border-b border-surface-variant/15 shadow-sm">
+    <div class="flex items-center justify-between px-margin-desktop py-stack-md w-full max-w-container-max mx-auto">
+      <div class="flex items-center gap-stack-lg">
+        <span class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight">LUMINA</span>
+        <nav class="hidden md:flex items-center gap-stack-lg">
+          <a class="text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors duration-300 px-4 py-2 rounded-lg" href="#">Home</a>
+          <a class="text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors duration-300 px-4 py-2 rounded-lg" href="#">Explore</a>
+          <a class="text-primary font-medium bg-surface-container-low px-4 py-2 rounded-lg" href="#">Wallet</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-stack-md">
+        <span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 transition-transform">notifications</span>
+        <span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 transition-transform">account_balance_wallet</span>
+        <div class="w-10 h-10 rounded-full overflow-hidden border border-surface-variant/20">
+          <img alt="User profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjfmS9YvdC3nwm8yK1gIgstFyLXnQgczB94DLWvqsXQuM-Otff4FCVsscGhEVLQsRJPLZ6uww7jjDgVKIJV15PsDgZPSeeQPCDdfgO72vBVMCw-KXRc7Mp2qDxr3grVBFtRNE4SOSRyak5dCfEzot147eZPO5YNXvKKCa5KkOvjZ9kObxtdDDWfMP2AdNZJbJe5_kMSClIhJLmqdrOixb6pRxe3R4p28bLED5IaVk44xMp-1fkEjaIFQJ8d7LWx7rc1aJ78S6adPc"/>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg space-y-stack-lg">
+    
+    <!-- Header Section -->
+    <section class="flex flex-col md:flex-row justify-between items-start md:items-end gap-stack-md">
+      <div>
+        <h1 class="font-headline-lg text-headline-lg text-on-surface">Mon Portefeuille</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Gérez vos avoirs et rechargez vos jetons Lumina.</p>
+      </div>
+      <div class="glass-card px-8 py-6 flex items-center gap-stack-md">
+        <div class="bg-surface-container-high p-3 rounded-full">
+          <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">token</span>
+        </div>
+        <div>
+          <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Solde Actuel</p>
+          <p class="font-headline-md text-headline-md text-primary">{{ currentBalance | number }} jetons</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Token Shop Section -->
+    <section class="space-y-stack-md">
+      <h2 class="font-headline-sm text-headline-sm text-on-surface">Boutique de Jetons</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+        
+        <!-- Loop des packages de jetons -->
+        <button *ngFor="let pack of tokenPacks" 
+                (click)="selectPack(pack)"
+                [ngClass]="{
+                  'active-selection border-primary/40': selectedPack.id === pack.id,
+                  'relative overflow-hidden': pack.isPopular
+                }"
+                class="token-pack-card group glass-card p-stack-lg text-left transition-all duration-300 hover:scale-[1.02] cursor-pointer outline-none ring-primary/20 focus:ring-4">
+          
+          <div *ngIf="pack.isPopular" class="absolute top-0 right-0 bg-secondary px-4 py-1 text-white font-label-md rounded-bl-xl">
+            POPULAIRE
+          </div>
+          
+          <div class="mb-stack-md bg-surface-container-low w-fit p-3 rounded-xl group-hover:bg-primary/10 transition-colors">
+            <span class="material-symbols-outlined text-primary text-3xl">{{ pack.icon }}</span>
+          </div>
+          
+          <p class="font-headline-sm text-headline-sm mb-1">{{ pack.tokens }} jetons</p>
+          <p class="font-body-md text-on-surface-variant mb-stack-lg">{{ pack.label }}</p>
+          
+          <div class="flex items-center justify-between">
+            <span class="font-headline-sm text-headline-sm text-secondary">{{ pack.priceXAF | number }} XAF</span>
+            <div class="w-6 h-6 border-2 rounded-full flex items-center justify-center radio-circle"
+                 [ngClass]="selectedPack.id === pack.id ? 'border-primary' : 'border-outline-variant'">
+              <div class="w-3 h-3 bg-primary rounded-full transition-opacity duration-200"
+                   [ngClass]="selectedPack.id === pack.id ? 'opacity-100' : 'opacity-0'">
+              </div>
+            </div>
+          </div>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- Payment Method Section -->
+    <section class="glass-card p-stack-lg space-y-stack-md">
+      <h2 class="font-headline-sm text-headline-sm text-on-surface">Moyen de Paiement</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+        
+        <!-- Loop des moyens de paiement structurés avec NgModel -->
+        <label *ngFor="let method of paymentMethods" 
+               class="flex items-center justify-between p-stack-md border border-surface-variant/30 rounded-xl cursor-pointer hover:bg-surface-container-low transition-all">
+          <div class="flex items-center gap-stack-md">
+            <input type="radio" 
+                   name="payment" 
+                   [value]="method.id" 
+                   [(ngModel)]="selectedPaymentMethodId"
+                   class="w-5 h-5 text-primary focus:ring-primary"/>
+            
+            <div [ngClass]="method.bgColorClass" class="p-2 rounded-lg">
+              <img [src]="method.logoUrl" [alt]="method.logoAlt" class="w-10 h-10 object-contain rounded"/>
+            </div>
+            <div>
+              <p class="font-body-md font-medium">{{ method.name }}</p>
+              <p class="font-body-sm text-on-surface-variant">{{ method.subtitle }}</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-primary transition-opacity duration-200"
+                [ngClass]="selectedPaymentMethodId === method.id ? 'opacity-100' : 'opacity-0'">
+            check_circle
+          </span>
+        </label>
+
+      </div>
+
+      <!-- Transaction Phone Number -->
+      <div class="mt-stack-lg">
+        <label class="font-label-md text-label-md text-on-surface-variant block mb-2 uppercase tracking-tight">
+          Numéro de téléphone mobile
+        </label>
+        <div class="relative max-w-md">
+          <input type="tel" 
+                 [(ngModel)]="phoneNumber"
+                 name="phoneNumber"
+                 class="w-full bg-[#FDFCFE] border border-[#E8E2ED] rounded-xl px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-body-md" 
+                 placeholder="+237 6XX XXX XXX"/>
+          <span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">smartphone</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Checkout CTA -->
+    <section class="flex flex-col items-center gap-stack-md py-stack-md">
+      <button (click)="confirmPurchase()"
+              class="carmin-gradient text-white w-full max-w-md py-4 rounded-full font-label-md text-label-md font-bold uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+        Confirmer l'achat via CamPay
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </button>
+      <div class="flex items-center gap-2 text-on-surface-variant">
+        <span class="material-symbols-outlined text-sm">shield</span>
+        <p class="font-body-sm">Paiement sécurisé par CamPay</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Ambient Decorative Background Effects -->
+  <div class="fixed bottom-0 right-0 -z-10 w-96 h-96 bg-primary/5 blur-[120px] rounded-full"></div>
+  <div class="fixed top-20 left-0 -z-10 w-64 h-64 bg-secondary/5 blur-[100px] rounded-full"></div>
+</div>

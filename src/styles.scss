@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(180, 120, 220, 0.15);
+}
+.luxury-shadow:hover {
+  box-shadow: 0 20px 40px -10px rgba(112, 0, 149, 0.08);
+  transform: translateY(-2px);
+}
+.carmin-gradient {
+  background: linear-gradient(135deg, #A8214A 0%, #C2185B 100%);
+}
+body {
+  background-color: #FDFCFE;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #E8E2ED; border-radius: 10px; }
+
+
+.text-gradient-carmin {
+  background: linear-gradient(135deg, #A8214A 0%, #C2185B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-violet {
+  background: linear-gradient(135deg, #700095 0%, #8B2AB0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-primary {
+  background: linear-gradient(to right, #A8214A, #C2185B);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.chart-bar {
+  transition: height 1s ease-out;
+}

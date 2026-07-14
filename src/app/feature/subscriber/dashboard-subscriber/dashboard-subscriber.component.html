@@ -1,0 +1,177 @@
+<!-- TopNavBar -->
+<nav class="bg-white/70 backdrop-blur-xl dark:bg-surface-container-lowest/70 top-0 z-50 border-b border-outline-variant/15 shadow-sm sticky">
+  <div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+    <div class="font-headline-sm text-headline-sm tracking-widest uppercase text-primary dark:text-primary-fixed-dim">LUMINA</div>
+    <div class="hidden md:flex items-center gap-stack-lg">
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Home</a>
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Explore</a>
+      <a class="text-primary font-bold border-b-2 border-primary" href="#">Mon Espace</a>
+    </div>
+    <div class="flex items-center gap-stack-md">
+      <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all active:scale-95">search</button>
+      <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all active:scale-95">notifications</button>
+      <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+        <img class="w-full h-full object-cover" [src]="user.avatarUrl" alt="User Profile Picture"/>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
+  <!-- Header Section -->
+  <header class="flex flex-col md:flex-row justify-between items-start md:items-end mb-stack-lg gap-stack-md">
+    <div>
+      <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Mon Espace</h1>
+      <p class="font-body-md text-on-surface-variant">Bienvenue dans votre univers exclusif LUMINA.</p>
+    </div>
+    
+    <!-- Token Balance Card -->
+    <div class="glass-card p-6 flex items-center gap-4 border-primary/20 token-glow w-full md:w-auto">
+      <div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-white">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+      </div>
+      <div>
+        <span class="font-label-md text-on-surface-variant block">Solde actuel</span>
+        <span class="font-headline-sm text-headline-sm text-primary">{{ user.tokenBalance | number }} tokens</span>
+      </div>
+      <button (click)="onRecharge()" class="carmin-gradient text-white px-6 py-2 rounded-full font-label-md hover:opacity-90 transition-all active:scale-95 ml-auto md:ml-4 shadow-lg shadow-secondary/20 cursor-pointer">
+        Recharger
+      </button>
+    </div>
+  </header>
+
+  <!-- Bento Grid Layout -->
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+    
+    <!-- Spending Card -->
+    <div class="md:col-span-4 glass-card p-stack-lg flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-start mb-4">
+          <h3 class="font-label-md text-on-surface-variant uppercase tracking-wider">Dépenses ce mois</h3>
+          <span class="material-symbols-outlined text-secondary">insights</span>
+        </div>
+        <div class="text-headline-md font-headline-md text-on-surface">
+          {{ monthlySpending | number }} <span class="text-body-sm font-label-md text-on-surface-variant">tokens</span>
+        </div>
+        <div class="flex items-center gap-1 mt-2 font-label-md text-green-600">
+          <span class="material-symbols-outlined text-sm">trending_down</span>
+          <span>{{ spendingChangePercent }}% vs mois dernier</span>
+        </div>
+      </div>
+      
+      <!-- Mini Chart Container (Dynamisé via interpolation) -->
+      <div class="mt-8 h-16 flex items-end gap-1">
+        @for (barHeight of chartBars; track $index) {
+          <div 
+            class="flex-1 rounded-t-sm transition-all duration-500"
+            [ngClass]="$last ? 'bg-primary' : 'bg-surface-variant/50'"
+            [style.height.%]="barHeight">
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Subscriptions Card -->
+    <div class="md:col-span-4 glass-card p-stack-lg">
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="font-label-md text-on-surface-variant uppercase tracking-wider">Abonnements Actifs</h3>
+        <span class="material-symbols-outlined text-primary">loyalty</span>
+      </div>
+      <div class="text-headline-md font-headline-md text-on-surface">{{ activeSubscriptions.length }}</div>
+      <p class="font-body-sm text-on-surface-variant mt-2">Créateurs suivis avec accès Premium.</p>
+      
+      <div class="mt-stack-lg space-y-3">
+        @for (sub of activeSubscriptions; track sub.name) {
+          <div class="flex items-center gap-3 p-2 hover:bg-surface-container-low rounded-lg transition-colors duration-200 cursor-pointer">
+            <div class="w-8 h-8 rounded-full" [ngClass]="sub.bgClass"></div>
+            <div class="flex-1 text-body-sm font-medium">{{ sub.name }}</div>
+            <span class="text-primary text-xs font-bold uppercase tracking-wide">{{ sub.badge }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Active Engagements -->
+    <div class="md:col-span-4 glass-card p-stack-lg">
+      <h3 class="font-label-md text-on-surface-variant uppercase tracking-wider mb-stack-md text-center">Interactions Fréquentes</h3>
+      <div class="flex flex-wrap justify-center gap-4">
+        @for (creator of engagements; track creator.name) {
+          <div class="group cursor-pointer flex flex-col items-center">
+            <div 
+              class="w-16 h-16 rounded-full p-0.5 group-hover:scale-110 transition-transform duration-300"
+              [ngClass]="creator.hasBorder ? 'border-2 border-primary' : 'border-2 border-primary/20'">
+              <img class="w-full h-full object-cover rounded-full" [src]="creator.avatarUrl" [alt]="creator.name"/>
+            </div>
+            <p class="text-[10px] text-center mt-2 font-label-md text-on-surface-variant">{{ creator.name }}</p>
+          </div>
+        }
+      </div>
+      <div class="mt-8 text-center">
+        <button (click)="onViewFavorites()" class="text-primary font-label-md hover:underline cursor-pointer">Voir tous vos favoris</button>
+      </div>
+    </div>
+
+    <!-- Transaction Table -->
+    <div class="md:col-span-12 glass-card overflow-hidden">
+      <div class="px-stack-lg py-6 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container-low/50">
+        <h2 class="font-headline-sm text-headline-sm text-on-surface">Transactions Récentes</h2>
+        <button (click)="onDownloadHistory()" class="text-primary font-label-md flex items-center gap-1 hover:opacity-80 transition-opacity cursor-pointer">
+          Télécharger historique <span class="material-symbols-outlined text-sm">download</span>
+        </button>
+      </div>
+      
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="bg-surface/50 font-label-md text-on-surface-variant uppercase text-xs tracking-widest">
+              <th class="px-stack-lg py-4">Date</th>
+              <th class="px-stack-lg py-4">Créateur / Article</th>
+              <th class="px-stack-lg py-4">Montant</th>
+              <th class="px-stack-lg py-4">Statut</th>
+            </tr>
+          </thead>
+          <tbody class="text-body-sm font-body-sm text-on-surface">
+            @for (tx of transactions; track tx.itemTitle + tx.date) {
+              <tr class="table-row-animate border-b border-surface-variant/20 hover:bg-surface-container/30 transition-all duration-300">
+                <td class="px-stack-lg py-5 text-on-surface-variant/80">{{ tx.date }}</td>
+                <td class="px-stack-lg py-5">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded flex items-center justify-center font-bold" [ngClass]="[tx.bgClass, tx.textClass]">
+                      {{ tx.initial }}
+                    </div>
+                    <span class="font-medium text-on-surface">{{ tx.itemTitle }}</span>
+                  </div>
+                </td>
+                <td class="px-stack-lg py-5 font-bold text-primary">{{ tx.amount }} tokens</td>
+                <td class="px-stack-lg py-5">
+                  <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-[10px] font-bold uppercase tracking-wider">
+                    {{ tx.status }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="p-6 text-center">
+        <button (click)="onLoadMoreTransactions()" class="font-label-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+          Afficher plus de transactions
+        </button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-surface dark:bg-surface-container-lowest border-t border-outline-variant/10 mt-stack-lg">
+  <div class="flex flex-col md:flex-row justify-between items-center py-8 px-margin-desktop max-w-container-max mx-auto gap-stack-md">
+    <div class="text-body-sm text-on-surface-variant">© 2026 LUMINA. All Rights Reserved.</div>
+    <div class="flex gap-stack-lg">
+      <a class="font-body-sm text-on-surface-variant hover:text-primary transition-all underline decoration-primary/30" href="#">Privacy Policy</a>
+      <a class="font-body-sm text-on-surface-variant hover:text-primary transition-all underline decoration-primary/30" href="#">Terms of Service</a>
+      <a class="font-body-sm text-on-surface-variant hover:text-primary transition-all underline decoration-primary/30" href="#">Contact</a>
+    </div>
+  </div>
+</footer>

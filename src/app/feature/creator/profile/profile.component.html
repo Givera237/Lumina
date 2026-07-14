@@ -1,0 +1,180 @@
+<header class="w-full sticky top-0 z-40 bg-white/70 backdrop-blur-xl border-b border-surface-variant/15 shadow-sm">
+  <div class="flex items-center justify-between px-margin-desktop py-stack-md w-full max-w-container-max mx-auto">
+    <div class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight cursor-pointer active:scale-95 transition-transform">
+      LUMINA
+    </div>
+    <div class="hidden md:flex items-center gap-stack-lg">
+      <nav class="flex gap-stack-md">
+        <a class="text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors duration-300 px-4 py-2 rounded-xl" href="#">Home</a>
+        <a class="text-primary font-medium hover:bg-surface-container-low transition-colors duration-300 px-4 py-2 rounded-xl" href="#">Explore</a>
+        <a class="text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors duration-300 px-4 py-2 rounded-xl" href="#">Subscriptions</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-stack-md">
+      <button class="material-symbols-outlined text-primary p-2 hover:bg-surface-container-low rounded-full transition-colors">notifications</button>
+      <button class="material-symbols-outlined text-primary p-2 hover:bg-surface-container-low rounded-full transition-colors">account_balance_wallet</button>
+      <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+        <img alt="User profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDahHl9hjE-Ffsqmx-BWVXeB3cQQFjyn6NSPztLOrEefgU3_Px5w0Q7d7g3QhkSB8O_IPXEU6fE16rXL3GNbKqMoBalszMhXy_ACfd4UD_V1Re0SgBVDRr2kwOmC_UE0YOThDCdWuFC4cb4vKLyFyKQrm96uv1Ju7dxEpr5Qp6YrGulCrplRKcJRNDs4_efeoJef3sLxPBECrdgjr2mv8G07rAVVFzDzl_6tH9I0X_25VxzXVxqKT-qa1Zgwca9yOwEo3ZKU3fJmtU"/>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-container-max mx-auto pb-stack-lg">
+  <section class="relative w-full h-[400px] overflow-hidden">
+    <div class="absolute inset-0 light-violet-gradient z-10"></div>
+    <img 
+      [src]="creator.bannerUrl" 
+      [style.transform]="'translateY(' + parallaxOffset + 'px)'"
+      class="w-full h-full object-cover opacity-60 transition-transform duration-100 ease-out" 
+      alt="Lumina Creator Banner"
+    />
+  </section>
+
+  <section class="px-margin-desktop -mt-24 relative z-20 flex flex-col md:flex-row items-end gap-stack-lg">
+    <div class="relative group">
+      <div class="w-48 h-48 rounded-[2rem] border-8 border-white overflow-hidden shadow-xl transform transition-transform group-hover:scale-[1.02]">
+        <img class="w-full h-full object-cover" [src]="creator.avatarUrl" [attr.alt]="creator.name"/>
+      </div>
+      <div *ngIf="creator.isVerified" class="absolute -bottom-2 -right-2 bg-primary text-white p-2 rounded-full shadow-lg">
+        <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+      </div>
+    </div>
+    
+    <div class="flex-grow flex flex-col md:flex-row justify-between items-start md:items-end w-full pb-stack-sm">
+      <div class="mb-4 md:mb-0">
+        <h1 class="font-headline-lg text-headline-lg text-on-surface leading-tight">{{ creator.name }}</h1>
+        <p class="font-body-lg text-primary/80 font-medium tracking-wide">{{ creator.title }}</p>
+        <div class="flex gap-stack-lg mt-stack-md">
+          <div class="text-center md:text-left">
+            <span class="block font-bold text-headline-sm">{{ creator.subscribers }}</span>
+            <span class="text-label-md text-on-surface-variant uppercase tracking-widest">subscribers</span>
+          </div>
+          <div class="text-center md:text-left">
+            <span class="block font-bold text-headline-sm">{{ creator.contentsCount }}</span>
+            <span class="text-label-md text-on-surface-variant uppercase tracking-widest">contents</span>
+          </div>
+          <div class="text-center md:text-left">
+            <span class="block font-bold text-headline-sm">{{ creator.views }}</span>
+            <span class="text-label-md text-on-surface-variant uppercase tracking-widest">views</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-stack-sm">
+        <button (click)="onSubscribe()" class="px-8 py-4 carmin-gradient text-white rounded-full font-bold shadow-lg hover:shadow-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer">
+          <span>S'abonner · {{ creator.subscriptionCost }} jetons/mois</span>
+        </button>
+        <button (click)="onShare()" class="p-4 glass-card rounded-full text-primary hover:bg-surface-container-high transition-colors cursor-pointer">
+          <span class="material-symbols-outlined">share</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <nav class="px-margin-desktop mt-stack-lg border-b border-surface-variant/15">
+    <div class="flex gap-stack-lg">
+      <button 
+        *ngFor="let tab of tabs" 
+        (click)="selectTab(tab)"
+        [ngClass]="activeTab === tab ? 'border-primary text-primary font-medium' : 'border-transparent text-on-surface-variant hover:text-primary'"
+        class="pb-4 border-b-2 transition-all cursor-pointer"
+      >
+        {{ tab }}
+      </button>
+    </div>
+  </nav>
+
+  <section *ngIf="activeTab === 'Contenus'" class="px-margin-desktop mt-stack-lg animate-fade-in">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+      
+      <div 
+        *ngFor="let item of contents" 
+        (click)="onContentClick(item)" 
+        class="glass-card rounded-[14px] overflow-hidden group cursor-pointer"
+      >
+        <div class="relative h-64 overflow-hidden">
+          <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" [src]="item.imageUrl" [attr.alt]="item.title"/>
+          
+          <div *ngIf="item.isPremium" class="absolute inset-0 bg-black/30 backdrop-blur-sm flex flex-col items-center justify-center text-white">
+            <span class="material-symbols-outlined text-[48px] mb-2">lock</span>
+            <span class="font-medium">Contenu Premium</span>
+          </div>
+          
+          <div class="absolute top-4 left-4 px-3 py-1 text-[12px] font-bold rounded-full uppercase tracking-tighter text-white"
+               [ngClass]="item.isPremium ? 'bg-primary' : 'bg-secondary'">
+            {{ item.isPremium ? item.tokensCost + ' Jetons' : 'Gratuit' }}
+          </div>
+          
+          <div *ngIf="!item.isPremium" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-primary/20">
+            <span class="material-symbols-outlined text-[64px] text-white" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+          </div>
+        </div>
+        
+        <div class="p-stack-md">
+          <h3 class="font-headline-sm text-[20px] mb-2">{{ item.title }}</h3>
+          <p class="text-body-sm text-on-surface-variant line-clamp-2">{{ item.description }}</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-label-md text-primary font-bold">{{ item.type }} · {{ item.meta }}</span>
+            <div class="flex items-center gap-1 text-on-surface-variant text-body-sm">
+              <span class="material-symbols-outlined text-[16px]">{{ item.type === 'PDF' ? 'download' : 'visibility' }}</span>
+              <span>{{ item.viewsOrDownloads }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section *ngIf="activeTab === 'À propos'" class="px-margin-desktop mt-stack-lg animate-fade-in">
+    <div class="glass-card p-8 rounded-2xl">
+      <h3 class="font-headline-sm mb-2">À propos de {{ creator.name }}</h3>
+      <p class="text-body-md text-on-surface-variant">Architecture d'écosystèmes holistiques et sanctuaires de bien-être haut de gamme.</p>
+    </div>
+  </section>
+
+  <section *ngIf="activeTab === 'Groupes'" class="px-margin-desktop mt-stack-lg animate-fade-in">
+    <div class="glass-card p-8 rounded-2xl text-center text-on-surface-variant">
+      Abonnez-vous pour rejoindre les cercles de discussion privés de Julian.
+    </div>
+  </section>
+
+  <section class="px-margin-desktop mt-24">
+    <div class="relative w-full rounded-[2rem] overflow-hidden bg-primary p-12 text-white shadow-xl">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+      </div>
+      <div class="relative z-10 max-w-2xl">
+        <h2 class="font-headline-md text-headline-md mb-4">Unlock the Full Sanctuary</h2>
+        <p class="font-body-lg mb-8 opacity-90">Get unlimited access to all content, private group discussions, and weekly live meditation sessions with Julian Zen.</p>
+        <button (click)="onSubscribe()" class="px-10 py-5 bg-white text-primary rounded-full font-bold hover:bg-surface-container-low transition-all active:scale-95 shadow-xl cursor-pointer">
+          S'abonner · {{ creator.subscriptionCost }} jetons/mois
+        </button>
+      </div>
+      <div class="absolute top-0 right-0 h-full w-1/3 hidden lg:block translate-x-12 translate-y-12">
+        <span class="material-symbols-outlined text-[240px] opacity-10">self_improvement</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="md:hidden fixed bottom-0 left-0 w-full bg-white/70 backdrop-blur-xl border-t border-surface-variant/15 z-40">
+  <div class="flex justify-around items-center py-4">
+    <button class="flex flex-col items-center gap-1 text-on-surface-variant">
+      <span class="material-symbols-outlined">home</span>
+      <span class="text-[10px] font-medium">Home</span>
+    </button>
+    <button class="flex flex-col items-center gap-1 text-primary">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+      <span class="text-[10px] font-medium">Profile</span>
+    </button>
+    <button class="flex flex-col items-center gap-1 text-on-surface-variant">
+      <span class="material-symbols-outlined">mail</span>
+      <span class="text-[10px] font-medium">Messages</span>
+    </button>
+    <button class="flex flex-col items-center gap-1 text-on-surface-variant">
+      <span class="material-symbols-outlined">payments</span>
+      <span class="text-[10px] font-medium">Wallet</span>
+    </button>
+  </div>
+</footer>

@@ -1,0 +1,169 @@
+<div class="min-h-screen bg-background text-on-surface font-body-md" [class.bg-search-active]="isSearchFocused">
+  
+  <aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant/15 flex flex-col p-stack-md gap-stack-lg z-50">
+    <div class="flex flex-col gap-1">
+      <h1 class="font-headline-sm text-headline-sm font-black text-primary">LUMINA</h1>
+      <p class="font-body-sm text-body-sm text-on-surface-variant opacity-70">Creator Studio</p>
+    </div>
+    
+    <nav class="flex flex-col gap-2 mt-4">
+      <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-all duration-200" href="#">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span class="font-body-sm text-body-sm">Dashboard</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-all duration-200" href="#">
+        <span class="material-symbols-outlined">insights</span>
+        <span class="font-body-sm text-body-sm">Analytics</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 bg-surface-container-high text-primary font-semibold rounded-xl active:translate-x-1 transition-transform" href="#">
+        <span class="material-symbols-outlined">layers</span>
+        <span class="font-body-sm text-body-sm">Content</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-all duration-200" href="#">
+        <span class="material-symbols-outlined">group</span>
+        <span class="font-body-sm text-body-sm">Subscribers</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-all duration-200" href="#">
+        <span class="material-symbols-outlined">settings</span>
+        <span class="font-body-sm text-body-sm">Settings</span>
+      </a>
+    </nav>
+    
+    <button class="mt-auto carmin-gradient text-white py-3 rounded-xl font-body-md text-body-md font-semibold shadow-md active:scale-95 transition-transform">
+      Post Content
+    </button>
+    
+    <div class="flex flex-col gap-2 pt-4 border-t border-outline-variant/10">
+      <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-all" href="#">
+        <span class="material-symbols-outlined">help_outline</span>
+        <span class="font-body-sm text-body-sm">Help</span>
+      </a>
+      <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-all" href="#">
+        <span class="material-symbols-outlined">logout</span>
+        <span class="font-body-sm text-body-sm">Sign Out</span>
+      </a>
+    </div>
+  </aside>
+
+  <main class="ml-64 min-h-screen px-margin-desktop py-stack-lg relative overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-[100px]"></div>
+
+    <section class="max-w-container-max mx-auto mb-stack-lg space-y-stack-md relative z-10">
+      <div class="flex flex-col gap-2">
+        <h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">Découvrir</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          Explorez les esprits les plus brillants et les créateurs visionnaires de l'écosystème LUMINA.
+        </p>
+      </div>
+
+      <div class="relative group max-w-3xl pt-stack-md">
+        <span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-primary/50 group-focus-within:text-primary transition-colors">
+          search
+        </span>
+        <input #searchInput
+               type="text"
+               [(ngModel)]="searchQuery"
+               (ngModelChange)="onSearchChange()"
+               (focus)="isSearchFocused = true"
+               (blur)="isSearchFocused = false"
+               class="w-full pl-16 pr-16 py-6 bg-surface-container-lowest border-2 border-outline-variant/30 rounded-2xl font-body-md text-body-md focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all duration-300 soft-glow placeholder:text-outline/50" 
+               placeholder="Rechercher un créateur..."/>
+        
+        <div class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2 items-center">
+          <button *ngIf="searchQuery" (click)="clearSearch()" class="text-on-surface-variant/40 hover:text-primary mr-1 flex items-center">
+            <span class="material-symbols-outlined text-[20px]">close</span>
+          </button>
+          <kbd class="bg-surface-container px-2 py-1 rounded text-[10px] font-bold text-primary border border-primary/10 select-none">
+            ⌘ K
+          </kbd>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-stack-sm items-center py-4">
+        <button *ngFor="let cat of categories"
+                (click)="selectCategory(cat)"
+                [ngClass]="selectedCategory === cat ? 'carmin-gradient text-on-primary shadow-lg shadow-secondary/20' : 'bg-surface-container-low text-primary hover:bg-surface-container-high'"
+                class="px-6 py-2 rounded-full font-label-md text-label-md active:scale-95 transition-all duration-200">
+          {{ cat }}
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2 text-on-surface-variant/60 font-body-sm text-body-sm bg-surface-container-low/50 self-start px-4 py-2 rounded-lg border border-outline-variant/10">
+        <span class="material-symbols-outlined text-[18px]">info</span>
+        <span>Note: Le contenu réservé nécessite une recherche exacte.</span>
+      </div>
+    </section>
+
+    <section class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter pb-stack-lg">
+      
+      <div *ngFor="let creator of filteredCreators; let i = index" 
+           class="glass-card rounded-[14px] overflow-hidden group hover:translate-y-[-4px] transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 card-entrance"
+           [style.animation-delay.ms]="i * 80">
+        
+        <div class="h-48 w-full relative overflow-hidden">
+          <img [src]="creator.image" [alt]="creator.name" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          <div *ngIf="creator.isPremium" class="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-white text-[10px] font-bold tracking-widest uppercase">
+            Premium
+          </div>
+        </div>
+
+        <div class="p-stack-md space-y-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface">{{ creator.name }}</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">{{ creator.role }}</p>
+            </div>
+            <span *ngIf="creator.isVerified" class="material-symbols-outlined text-primary" [style.font-variation-settings]="'\'FILL\' 1'">
+              verified
+            </span>
+          </div>
+
+          <div class="flex gap-2">
+            <span *ngFor="let tag of creator.tags" class="px-2 py-1 bg-surface-container-high text-primary rounded-md text-[10px] font-bold">
+              {{ tag }}
+            </span>
+          </div>
+          <button class="w-full py-3 border border-outline-variant text-primary font-semibold rounded-xl hover:bg-surface-container-low transition-colors">
+            Voir le Profil
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="filteredCreators.length === 0" class="col-span-full py-20 flex flex-col items-center justify-center text-center space-y-6 animate-fade-in">
+        <div class="relative w-64 h-64 flex items-center justify-center">
+          <div class="absolute inset-0 bg-primary/5 rounded-full animate-pulse"></div>
+          <div class="glass-card w-48 h-48 rounded-[30px] flex items-center justify-center rotate-12 shadow-xl border-outline-variant/20">
+            <span class="material-symbols-outlined text-primary text-6xl opacity-30">lock</span>
+          </div>
+          <div class="glass-card absolute -bottom-4 -right-4 w-32 h-32 rounded-full flex items-center justify-center -rotate-12 shadow-lg border-outline-variant/20">
+            <span class="material-symbols-outlined text-secondary text-4xl opacity-50">search_off</span>
+          </div>
+        </div>
+        <div class="max-w-md space-y-2">
+          <h4 class="font-headline-sm text-headline-sm text-on-surface">Résultats restreints</h4>
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            Nous avons trouvé des correspondances partielles ou aucun résultat. Certains créateurs nécessitent une <strong>recherche exacte</strong> pour apparaître par mesure de confidentialité.
+          </p>
+          <button (click)="clearSearch()" class="mt-4 px-8 py-3 carmin-gradient text-white rounded-full font-label-md text-label-md shadow-xl hover:shadow-secondary/30 transition-all">
+            Réinitialiser la recherche
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="w-full py-stack-lg border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-stack-md relative z-10">
+      <div class="flex items-center gap-2">
+        <span class="font-headline-sm text-headline-sm font-bold text-primary">LUMINA</span>
+        <span class="font-body-sm text-body-sm text-on-surface-variant ml-4">© 2026 LUMINA. All rights reserved.</span>
+      </div>
+      <div class="flex gap-8">
+        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Cookies</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Careers</a>
+      </div>
+    </footer>
+  </main>
+</div>
