@@ -66,6 +66,28 @@ export class ResetPasswordComponent
     { validators: passwordsMatchValidator },
   );
  
+
+   token: string | null = null;
+  
+    ngOnInit() 
+    {
+      // On s'abonne aux queryParams pour intercepter le changement d'URL à tous les coups
+      this.route.queryParams.subscribe(params => {
+        this.token = params['token'];
+        
+        if (this.token) 
+        {
+          console.log('Token de réinitialisation du mot de passe reçu :', this.token);
+          this.verifierTokenAvecLeBackend(this.token);
+        }
+      });
+    }
+  
+    verifierTokenAvecLeBackend(token: string) 
+    {
+      // Votre appel API ici...
+    }
+
   protected get newPasswordControl() {
     return this.form.controls.newPassword;
   }
