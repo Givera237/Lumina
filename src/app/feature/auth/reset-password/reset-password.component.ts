@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   AbstractControl,
@@ -18,40 +18,35 @@ type StrengthLevel = 'empty' | 'weak' | 'medium' | 'strong' | 'excellent';
  
 interface StrengthInfo {
   level: StrengthLevel;
-  score: number; // 0-4, nombre de barres actives
+  score: number;
   label: string;
   barClass: string;
   textClass: string;
 }
- 
-/**
- * Adapté du prototype HTML statique "Réinitialiser le mot de passe".
- *
- * Hypothèses faites lors de l'adaptation (à ajuster si besoin) :
- * - AuthService expose `resetPassword(token: string, newPassword: string): Observable<void>`.
- * - Le token de réinitialisation arrive en query param `?token=...` sur cette route.
- * - Le lien "Retour à la connexion" pointe vers '/auth/login'.
- * - Redirection automatique vers le login après succès (ajustable/à retirer).
- */
 
 @Component({
   selector: 'app-reset-password',
+  standalone: true, // Ajouté si tu es en Angular moderne/standalone
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss'
 })
-export class ResetPasswordComponent 
-{
+export class ResetPasswordComponent {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
  
-  // --- Token de réinitialisation transmis par e-mail ---
+  // --- Token de réinitialisation transmis par e-mail via Signal ---
   private readonly queryParamMap = toSignal(this.route.queryParamMap, { initialValue: null });
+  
+  // Dérivé réactif pour obtenir facilement le token sous forme de chaîne
+  private readonly token = computed(() => this.queryParamMap()?.get('token') ?? null);
  
   // --- État local piloté par signaux ---
+  protected readonly isCheckingToken = signal(true); // En cours de vérification au chargement
+  protected readonly isTokenValid = signal(false);   // Détermine si le formulaire doit s'afficher
   protected readonly isSubmitting = signal(false);
   protected readonly isSuccess = signal(false);
   protected readonly errorMessage = signal<string | null>(null);
@@ -65,28 +60,39 @@ export class ResetPasswordComponent
     },
     { validators: passwordsMatchValidator },
   );
- 
 
-   token: string | null = null;
+  constructor() {
+    // On réagit automatiquement dès que le token dans l'URL change
+    effect(() => {
+      const currentToken = this.token();
+      if (currentToken) {
+        this.verifierTokenAvecLeBackend(currentToken);
+      } else {
+        this.isCheckingToken.set(false);
+        this.isTokenValid.set(false);
+        this.errorMessage.set('Lien de réinitialisation manquant.');
+      }
+    });
+  }
   
-    ngOnInit() 
-    {
-      // On s'abonne aux queryParams pour intercepter le changement d'URL à tous les coups
-      this.route.queryParams.subscribe(params => {
-        this.token = params['token'];
-        
-        if (this.token) 
-        {
-          console.log('Token de réinitialisation du mot de passe reçu :', this.token);
-          this.verifierTokenAvecLeBackend(this.token);
+  private verifierTokenAvecLeBackend(token: string): void {
+    this.isCheckingToken.set(true);
+    this.errorMessage.set(null);
+
+    this.authService.verifyResetToken(token)
+      .pipe(finalize(() => this.isCheckingToken.set(false)))
+      .subscribe({
+        next: () => {
+          console.log('Token de réinitialisation du mot de passe validé avec succès.');
+          this.isTokenValid.set(true);
+        },
+        error: (error) => {
+          console.error('Erreur lors de la validation du token :', error);
+          this.isTokenValid.set(false);
+          this.errorMessage.set('Lien de réinitialisation invalide ou expiré.');
         }
       });
-    }
-  
-    verifierTokenAvecLeBackend(token: string) 
-    {
-      // Votre appel API ici...
-    }
+  }
 
   protected get newPasswordControl() {
     return this.form.controls.newPassword;
@@ -96,7 +102,7 @@ export class ResetPasswordComponent
     return this.form.controls.confirmPassword;
   }
  
-  // --- Indicateur de robustesse du mot de passe, dérivé réactivement ---
+  // --- Indicateur de robustesse du mot de passe ---
   private readonly newPasswordValue = toSignal(this.newPasswordControl.valueChanges, {
     initialValue: '',
   });
@@ -112,13 +118,13 @@ export class ResetPasswordComponent
   }
  
   protected onSubmit(): void {
-    if (this.form.invalid || this.isSubmitting()) {
+    if (this.form.invalid || this.isSubmitting() || !this.isTokenValid()) {
       this.form.markAllAsTouched();
       return;
     }
  
-    const token = this.queryParamMap()?.get('token');
-    if (!token) {
+    const currentToken = this.token();
+    if (!currentToken) {
       this.errorMessage.set('Lien de réinitialisation invalide ou expiré.');
       return;
     }
@@ -127,7 +133,7 @@ export class ResetPasswordComponent
     this.isSubmitting.set(true);
  
     this.authService
-      .resetPassword(token, this.newPasswordControl.value)
+      .resetPassword(currentToken, this.newPasswordControl.value)
       .pipe(finalize(() => this.isSubmitting.set(false)))
       .subscribe({
         next: () => {
@@ -143,7 +149,7 @@ export class ResetPasswordComponent
   }
 }
  
-/** Validateur au niveau du groupe : confirme que les deux mots de passe correspondent. */
+/** Validateur au niveau du groupe */
 const passwordsMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
   const newPassword = group.get('newPassword')?.value;
   const confirmPassword = group.get('confirmPassword')?.value;
@@ -155,7 +161,7 @@ const passwordsMatchValidator: ValidatorFn = (group: AbstractControl): Validatio
   return newPassword === confirmPassword ? null : { passwordMismatch: true };
 };
  
-/** Calcule le niveau de robustesse, reprenant la logique du prototype d'origine. */
+/** Calcule le niveau de robustesse */
 function computeStrength(value: string): StrengthInfo {
   if (!value) {
     return {
@@ -177,28 +183,10 @@ function computeStrength(value: string): StrengthInfo {
     return { level: 'weak', score: 1, label: 'Faible', barClass: 'bg-error', textClass: 'text-error' };
   }
   if (score === 2) {
-    return {
-      level: 'medium',
-      score: 2,
-      label: 'Moyen',
-      barClass: 'bg-secondary',
-      textClass: 'text-secondary',
-    };
+    return { level: 'medium', score: 2, label: 'Moyen', barClass: 'bg-secondary', textClass: 'text-secondary' };
   }
   if (score === 3) {
-    return {
-      level: 'strong',
-      score: 3,
-      label: 'Fort',
-      barClass: 'bg-primary-container',
-      textClass: 'text-primary-container',
-    };
+    return { level: 'strong', score: 3, label: 'Fort', barClass: 'bg-primary-container', textClass: 'text-primary-container' };
   }
-  return {
-    level: 'excellent',
-    score: 4,
-    label: 'Excellent',
-    barClass: 'bg-primary',
-    textClass: 'text-primary',
-  };
+  return { level: 'excellent', score: 4, label: 'Excellent', barClass: 'bg-primary', textClass: 'text-primary' };
 }

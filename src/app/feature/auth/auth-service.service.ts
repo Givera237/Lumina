@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core'
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from './models/user.model'
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
@@ -118,6 +118,13 @@ export class AuthService {
   resetPassword(token: string, newPassword: string): Observable<void> 
   {
     return this.http.post<void>(`${this.baseUrl}/reset-password`, { token, newPassword });
+  }
+
+  verifyResetToken(token: string): Observable<any>
+  {
+    const params = new HttpParams().set('jwt', token);
+
+    return this.http.get<void>(`${this.baseUrl}/validate`, { params });
   }
 
 }
