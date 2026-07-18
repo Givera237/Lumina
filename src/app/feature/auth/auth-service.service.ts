@@ -111,7 +111,8 @@ export class AuthService {
 
   requestPasswordReset(email : string): Observable<void> 
   {
-    return this.http.post<void>(`${this.baseUrl}/request-password-reset`, { email });
+    console.log(`${this.baseUrl}/forgot-password`, { email });
+    return this.http.post<void>(`${this.baseUrl}/forgot-password`, { email });
   }
 
   resetPassword(token: string, newPassword: string): Observable<void> 
