@@ -124,6 +124,8 @@ export class AuthService {
   {
     const params = new HttpParams().set('jwt', token);
 
+    console.log(`Vérification du token de réinitialisation du mot de passe : ${token}`);
+    console.log(`Requête GET vers : ${this.baseUrl}/validate avec params :`, params.toString());
     return this.http.get<void>(`${this.baseUrl}/validate`, { params });
   }
 
