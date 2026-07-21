@@ -26,13 +26,14 @@ interface StrengthInfo {
 
 @Component({
   selector: 'app-reset-password',
-  standalone: true, // Ajouté si tu es en Angular moderne/standalone
+  standalone: true, 
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss'
 })
-export class ResetPasswordComponent {
+export class ResetPasswordComponent 
+{
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly route = inject(ActivatedRoute);
@@ -42,7 +43,7 @@ export class ResetPasswordComponent {
   private readonly queryParamMap = toSignal(this.route.queryParamMap, { initialValue: null });
   
   // Dérivé réactif pour obtenir facilement le token sous forme de chaîne
-  private readonly token = computed(() => this.queryParamMap()?.get('token') ?? null);
+  private readonly token = computed(() => this.queryParamMap()?.get('jwt') ?? null);
  
   // --- État local piloté par signaux ---
   protected readonly isCheckingToken = signal(true); // En cours de vérification au chargement
@@ -61,20 +62,26 @@ export class ResetPasswordComponent {
     { validators: passwordsMatchValidator },
   );
 
-  constructor() {
+  constructor() 
+  {
     // On réagit automatiquement dès que le token dans l'URL change
     effect(() => {
       const currentToken = this.token();
-      if (currentToken) {
+      if (currentToken) 
+      {
         this.verifierTokenAvecLeBackend(currentToken);
-      } else {
+      } 
+      else 
+      {
         this.isCheckingToken.set(false);
         this.isTokenValid.set(false);
         this.errorMessage.set('Lien de réinitialisation manquant.');
+
+        console.log("test du constructor en sortie")
       }
     });
   }
-  
+
   private verifierTokenAvecLeBackend(token: string): void {
     this.isCheckingToken.set(true);
     this.errorMessage.set(null);
