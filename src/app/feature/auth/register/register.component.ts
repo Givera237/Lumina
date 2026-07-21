@@ -8,7 +8,7 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -43,7 +43,6 @@ export class RegisterComponent
 
   onRegisterSubmit(): void 
   {
-    console.log(this.registerForm.value);
     const email = this.registerForm.value.email!;
 
     this.AuthService.createUser(this.registerForm.value).subscribe(
@@ -51,7 +50,6 @@ export class RegisterComponent
       next: (response: any) => 
       { 
         this.AuthService.setEmail(email);
-        console.log('Utilisateur créé avec succès !', response);
         this.router.navigate(['auth/mail-verification']);
       },
       error: (error: any) => 
@@ -66,6 +64,5 @@ export class RegisterComponent
   setRole(role: 'creator' | 'SUBSCRIBER'): void 
   {
     this.selectedRole = role;
-    console.log(`Rôle sélectionné : ${this.selectedRole}`);
   }
 }

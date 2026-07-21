@@ -145,17 +145,12 @@ export class MailVerificationComponent
 
         next: (response : any) => 
         {
-          console.log('Utilisateur créé avec succès !', response);
-          console.log('voici le objet : ', obj);
           this.router.navigate(['/auth/login']);
 
         }, 
 
         error: (error : any) => 
         { 
-          console.log('voici le obj dans ereur : ', obj);
-          console.log('erreur verification mail', error)
-          console.log('Voici le message d erreur : ',error.error.error.message)
           this.errorMessage.set(error.error.error.message);
           this.isSubmitting = false; this.triggerError(); 
         }

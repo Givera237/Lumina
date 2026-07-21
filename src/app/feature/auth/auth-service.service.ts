@@ -111,7 +111,6 @@ export class AuthService {
 
   requestPasswordReset(email : string): Observable<void> 
   {
-    console.log(`${this.baseUrl}/forgot-password`, { email });
     return this.http.post<void>(`${this.baseUrl}/forgot-password`, { email });
   }
 
@@ -124,8 +123,6 @@ export class AuthService {
   {
     const params = new HttpParams().set('jwt', token);
 
-    console.log(`Vérification du token de réinitialisation du mot de passe : ${token}`);
-    console.log(`Requête GET vers : ${this.baseUrl}/validate avec params :`, params.toString());
     return this.http.get<void>(`${this.baseUrl}/validate`, { params });
   }
 

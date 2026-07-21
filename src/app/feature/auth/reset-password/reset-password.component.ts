@@ -76,8 +76,6 @@ export class ResetPasswordComponent
         this.isCheckingToken.set(false);
         this.isTokenValid.set(false);
         this.errorMessage.set('Lien de réinitialisation manquant.');
-
-        console.log("test du constructor en sortie")
       }
     });
   }
@@ -90,11 +88,9 @@ export class ResetPasswordComponent
       .pipe(finalize(() => this.isCheckingToken.set(false)))
       .subscribe({
         next: () => {
-          console.log('Token de réinitialisation du mot de passe validé avec succès.');
           this.isTokenValid.set(true);
         },
         error: (error) => {
-          console.error('Erreur lors de la validation du token :', error);
           this.isTokenValid.set(false);
           this.errorMessage.set('Lien de réinitialisation invalide ou expiré.');
         }

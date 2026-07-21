@@ -55,14 +55,11 @@ export class ForgetPasswordComponent
       .subscribe({
         next: (response: any) => 
         {
-          console.log('Lien de réinitialisation du mot de passe envoyé avec succès.', email);
-          console.log('Réponse du serveur :', response);
           this.isSuccess.set(true);
           this.triggerToast();
         },
         error: (error: any) => 
         {
-          console.error("Erreur lors de l'envoi du lien de réinitialisation.", error);
           this.errorMessage.set(
             "Impossible d'envoyer le lien pour le moment. Vérifie ton e-mail et réessaie.",
           );
